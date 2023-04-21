@@ -61,7 +61,7 @@ function getTopGenres(artists: SpotifyArtist[]) {
             }
             return b.total - a.total
         })
-        .splice(0, 15)
+        .splice(0, 10)
 }
 
 const getToken = async () => {
