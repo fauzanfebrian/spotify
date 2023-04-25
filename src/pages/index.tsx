@@ -1,55 +1,15 @@
-import { AxiosError } from 'axios'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import axios from 'src/axios'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
 import Tracks from 'src/components/tracks'
 import { SpotifyData } from 'src/interface'
+import { getSpotifyData } from './api/spotify-data'
 
-export default function Home() {
-    const [loading, setLoading] = useState(false)
-    const [data, setData] = useState<SpotifyData>()
-
+export default function Home({ data }: { data?: SpotifyData }) {
     const spotifyLink = 'https://fauzanfebrian.my.id/spotify'
-
-    useEffect(() => {
-        if (!data) load()
-    }, [data])
-
-    const load = async () => {
-        try {
-            setLoading(true)
-            const res = await axios.get<SpotifyData>('/spotify-data')
-
-            setData(res.data)
-        } catch (error) {
-            if (error instanceof AxiosError) console.error(error)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    if (loading)
-        return (
-            <main className="h-screen w-screen bg-green-600 flex justify-center items-center">
-                <Link
-                    href={spotifyLink}
-                    className="text-white font-gotham text-2xl md:text-6xl mr-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Spotify
-                </Link>
-                <h4 className="text-gray-950 text-2xl md:text-6xl loading">
-                    Loading<span className="dot-1">.</span>
-                    <span className="dot-2">.</span>
-                    <span className="dot-3">.</span>
-                </h4>
-            </main>
-        )
 
     if (!data)
         return (
@@ -139,4 +99,13 @@ export default function Home() {
             </main>
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    try {
+        const data = await getSpotifyData()
+        return Promise.resolve({ props: { data } })
+    } catch (error) {
+        return Promise.resolve({ props: { data: null } })
+    }
 }

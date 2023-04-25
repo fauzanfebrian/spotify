@@ -7,13 +7,7 @@ let expireToken: Date
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
     try {
-        await getToken()
-
-        const [artists, tracks, user] = await Promise.all([getTopArtists(), getTopTracks(), getUser()])
-
-        const genres = getTopGenres(artists)
-
-        const data: SpotifyData = { artists, tracks, genres, user }
+        const data = await getSpotifyData()
 
         res.status(200).json(data)
     } catch (error) {
@@ -23,6 +17,16 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
 
         res.status(statusCode).json({ message, statusCode, data })
     }
+}
+
+export async function getSpotifyData(): Promise<SpotifyData> {
+    await getToken()
+
+    const [artists, tracks, user] = await Promise.all([getTopArtists(), getTopTracks(), getUser()])
+
+    const genres = getTopGenres(artists)
+
+    return { artists, tracks, genres, user }
 }
 
 async function getTopArtists(): Promise<SpotifyArtist[]> {
