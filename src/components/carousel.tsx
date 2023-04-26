@@ -27,8 +27,8 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing }: Carous
         if (!containerRef.current) return
         if (event.touches.length === 1) {
             const touch = event.touches[0]
-            const touchDeltaX = touch.clientX - containerRef.current.touchStartX!
-            containerRef.current.scrollLeft = containerRef.current.touchStartScrollLeft! - touchDeltaX
+            const touchDeltaX = touch.clientX - containerRef.current.touchStartX! - 30
+            containerRef.current.scrollLeft = containerRef.current.touchStartScrollLeft! - touchDeltaX - 30
         }
     }
 
@@ -49,8 +49,8 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing }: Carous
         if (!containerRef.current || !isGrabbing) return
 
         if (containerRef.current.touchStartX) {
-            const touchDeltaX = event.clientX - containerRef.current.touchStartX
-            containerRef.current.scrollLeft = (containerRef.current.touchStartScrollLeft || 0) - touchDeltaX
+            const touchDeltaX = event.clientX - containerRef.current.touchStartX - 30
+            containerRef.current.scrollLeft = (containerRef.current.touchStartScrollLeft || 0) - touchDeltaX - 30
         }
     }
 

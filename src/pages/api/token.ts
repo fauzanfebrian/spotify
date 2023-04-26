@@ -4,8 +4,6 @@ import { SpotifyToken } from 'src/interface'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
-        console.log(req.body)
-
         const code = req.body.spotifyCode
         const redirectUri = process.env.SPOTIFY_REDIRECT_URI
         const clientId = process.env.SPOTIFY_CLIENT_ID
@@ -28,8 +26,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded', Authorization: `Basic ${encodedToken}` } }
         )
-
-        console.log(resToken.data)
 
         res.status(200).json({ refreshToken: resToken.data.refresh_token, token: resToken.data.access_token })
     } catch (error) {

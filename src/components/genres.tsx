@@ -1,4 +1,4 @@
-import { ArcElement, Chart, Title, Legend } from 'chart.js'
+import { ArcElement, Chart, Legend, Title } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
 import { SpotifyGenre } from 'src/interface'
 

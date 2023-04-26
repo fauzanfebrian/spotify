@@ -9,7 +9,7 @@ const nextConfig = {
         SPOTIFY_USER_ID: process.env.SPOTIFY_USER_ID,
     },
     images: {
-        domains: ['i.scdn.co'],
+        domains: ['i.scdn.co', 'mosaic.scdn.co'],
     },
 }
 

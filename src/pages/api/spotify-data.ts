@@ -1,8 +1,18 @@
 import axios, { AxiosError } from 'axios'
 import dayjs from 'dayjs'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { SpotifyArtist, SpotifyData, SpotifyGenre, SpotifyToken, SpotifyTrack, SpotifyUser } from 'src/interface'
+import {
+    SpotifyArtist,
+    SpotifyData,
+    SpotifyGenre,
+    SpotifyPlaylist,
+    SpotifyToken,
+    SpotifyTrack,
+    SpotifyUser,
+} from 'src/interface'
 
+let spotifyData: SpotifyData
+let spotifyDataTtl: Date
 let expireToken: Date
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
@@ -20,18 +30,39 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
 }
 
 export async function getSpotifyData(): Promise<SpotifyData> {
+    if (spotifyDataTtl > dayjs().toDate()) return spotifyData
+
     await getToken()
 
-    const [artists, tracks, user] = await Promise.all([getTopArtists(), getTopTracks(), getUser()])
+    const [artists, tracks, user, playlists] = await Promise.all([
+        getTopArtists(),
+        getTopTracks(),
+        getUser(),
+        getPlaylists(),
+    ])
 
     const genres = getTopGenres(artists)
 
-    return { artists, tracks, genres, user }
+    const data: SpotifyData = { artists, tracks, genres, user, playlists }
+
+    spotifyData = data
+    spotifyDataTtl = dayjs().add(12, 'hour').toDate()
+
+    return data
 }
 
 async function getTopArtists(): Promise<SpotifyArtist[]> {
     const res = await axios.get('https://api.spotify.com/v1/me/top/artists?limit=20&offset=0&time_range=short_term')
     return res.data?.items || []
+}
+
+async function getPlaylists(): Promise<SpotifyPlaylist[]> {
+    const spotifyId = process.env.SPOTIFY_USER_ID
+    const res = await axios.get(`https://api.spotify.com/v1/users/${spotifyId}/playlists`)
+
+    const playlists: SpotifyPlaylist[] = res.data?.items || []
+
+    return playlists
 }
 
 async function getTopTracks(): Promise<SpotifyTrack[]> {

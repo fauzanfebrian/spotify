@@ -3,6 +3,7 @@ export interface SpotifyData {
     tracks: SpotifyTrack[]
     genres: SpotifyGenre[]
     user: SpotifyUser
+    playlists: SpotifyPlaylist[]
 }
 
 export interface SpotifyToken {
@@ -21,6 +22,28 @@ export interface SpotifyUser {
     images: Image[]
     type: string
     uri: string
+}
+
+export interface SpotifyPlaylist {
+    collaborative: boolean
+    description: string
+    external_urls: ExternalUrls
+    href: string
+    id: string
+    images: Image[]
+    name: string
+    owner: SpotifyUser
+    primary_color: any
+    public: boolean
+    snapshot_id: string
+    tracks: Tracks
+    type: string
+    uri: string
+}
+
+export interface Tracks {
+    href: string
+    total: number
 }
 
 export interface SpotifyGenre {
