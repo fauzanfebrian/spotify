@@ -9,9 +9,10 @@ export interface CarouselProps {
     children: React.ReactNode
     isGrabbing: boolean
     setIsGrabbing: Dispatch<SetStateAction<boolean>>
+    showAll?: boolean
 }
 
-export default function Carousel({ children, isGrabbing, setIsGrabbing }: CarouselProps) {
+export default function Carousel({ children, isGrabbing, setIsGrabbing, showAll }: CarouselProps) {
     const containerRef = useRef<ContainerRefType>(null)
 
     function handleTouchStart(event: React.TouchEvent<HTMLDivElement>) {
@@ -27,8 +28,8 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing }: Carous
         if (!containerRef.current) return
         if (event.touches.length === 1) {
             const touch = event.touches[0]
-            const touchDeltaX = touch.clientX - containerRef.current.touchStartX! - 30
-            containerRef.current.scrollLeft = containerRef.current.touchStartScrollLeft! - touchDeltaX - 30
+            const touchDeltaX = touch.clientX - containerRef.current.touchStartX! - 60
+            containerRef.current.scrollLeft = containerRef.current.touchStartScrollLeft! - touchDeltaX - 60
         }
     }
 
@@ -49,8 +50,8 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing }: Carous
         if (!containerRef.current || !isGrabbing) return
 
         if (containerRef.current.touchStartX) {
-            const touchDeltaX = event.clientX - containerRef.current.touchStartX - 30
-            containerRef.current.scrollLeft = (containerRef.current.touchStartScrollLeft || 0) - touchDeltaX - 30
+            const touchDeltaX = event.clientX - containerRef.current.touchStartX - 60
+            containerRef.current.scrollLeft = (containerRef.current.touchStartScrollLeft || 0) - touchDeltaX - 60
         }
     }
 
@@ -63,7 +64,10 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing }: Carous
 
     return (
         <div
-            className="card-container mt-3 flex flex-nowrap justify-start items-center overflow-x-scroll gap-x-4"
+            className={[
+                'card-container mt-3 flex items-center overflow-x-scroll gap-4',
+                showAll ? 'flex-wrap justify-center' : 'flex-nowrap justify-start',
+            ].join(' ')}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}

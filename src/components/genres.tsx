@@ -5,15 +5,14 @@ import { SpotifyGenre } from 'src/interface'
 Chart.register(ArcElement, Legend, Title)
 
 export default function Genres({ genres }: { genres: SpotifyGenre[] }) {
-    const total = genres.reduce((prev, acc) => prev + acc.total, 0)
     const genreNames = genres.map(genre => genre.name)
-    const genreTotals = genres.map(genre => genre.total)
+    const genrePercentages = genres.map(genre => genre.percentage)
 
     const data = {
         labels: genreNames.splice(0, 5),
         datasets: [
             {
-                data: genreTotals.splice(0, 5),
+                data: genrePercentages.splice(0, 5),
                 backgroundColor: ['#1DB954', '#FFFF00', '#0E185F', '#3B0000', '#FF1E1E'],
             },
         ],
@@ -28,12 +27,19 @@ export default function Genres({ genres }: { genres: SpotifyGenre[] }) {
                 </div>
                 <div className="flex-1">
                     {genres.map((genre, i) => {
-                        const percentage = (genre.total / total) * 100
                         return (
-                            <div key={`genre-${i}`} className="flex justify-between my-1 items-center">
-                                <h4 className="text-white capitalize w-[100px] md:w-[250px]">{genre.name}</h4>
-                                <div className="flex items-center justify-end flex-1">
-                                    <div className="h-[17px] bg-red-500" style={{ width: `${percentage}%` }} />
+                            <div
+                                key={`genre-${i}`}
+                                className="flex justify-between my-1 items-center relative bg-black p-2 bg-opacity-20 rounded"
+                            >
+                                <h4 className="text-white capitalize z-10">{genre.name}</h4>
+                                <div className="absolute w-full flex justify-end right-1">
+                                    <div
+                                        className="min-h-full bg-red-500 z-0 text-right pr-1 rounded-sm"
+                                        style={{ width: `${genre.percentage}%` }}
+                                    >
+                                        {genre.percentage}%
+                                    </div>
                                 </div>
                             </div>
                         )

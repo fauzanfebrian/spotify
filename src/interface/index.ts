@@ -49,6 +49,7 @@ export interface Tracks {
 export interface SpotifyGenre {
     name: string
     total: number
+    percentage: number
 }
 
 export interface SpotifyArtist {

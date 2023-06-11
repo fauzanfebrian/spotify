@@ -12,7 +12,7 @@ import Playlists from 'src/components/playlists'
 export default function Home({ data }: { data?: SpotifyData }) {
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`
 
-    if (!data)
+    if (!data) {
         return (
             <main className="h-screen w-screen bg-img flex justify-center items-center">
                 <Link
@@ -25,6 +25,7 @@ export default function Home({ data }: { data?: SpotifyData }) {
                 </Link>
             </main>
         )
+    }
 
     const { user, artists, tracks, genres, playlists } = data
 
