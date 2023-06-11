@@ -33,13 +33,12 @@ export default function Genres({ genres }: { genres: SpotifyGenre[] }) {
                                 className="flex justify-between my-1 items-center relative bg-black p-2 bg-opacity-20 rounded"
                             >
                                 <h4 className="text-white capitalize z-10">{genre.name}</h4>
-                                <div className="absolute w-full flex justify-end right-1">
+                                <div className="absolute w-full flex justify-end right-1 pr-1">
                                     <div
-                                        className="min-h-full bg-red-500 z-0 text-right pr-1 rounded-sm"
+                                        className="min-h-full bg-red-500 ext-right rounded-sm absolute z-0 right-0"
                                         style={{ width: `${genre.percentage}%` }}
-                                    >
-                                        {genre.percentage}%
-                                    </div>
+                                    ></div>
+                                    <p className="z-10 text-gray-300">{genre.percentage}%</p>
                                 </div>
                             </div>
                         )
