@@ -4,10 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
+import Playlists from 'src/components/playlists'
 import Tracks from 'src/components/tracks'
 import { SpotifyData } from 'src/interface'
 import { getSpotifyData } from './api/spotify-data'
-import Playlists from 'src/components/playlists'
 
 export default function Home({ data }: { data?: SpotifyData }) {
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`

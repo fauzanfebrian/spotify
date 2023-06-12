@@ -41,8 +41,6 @@ export async function getSpotifyData(): Promise<SpotifyData> {
         getPlaylists(),
     ])
 
-    console.log(artists.length)
-
     const genres = getTopGenres(artists)
 
     const data: SpotifyData = { artists, tracks, genres, user, playlists }

@@ -22,6 +22,7 @@ export default function Tracks({ tracks }: { tracks: SpotifyTrack[] }) {
                     <Card
                         key={`track-${track.id}`}
                         thumbnailUrl={track.album.images?.[0]?.url}
+                        trackPreviewUrl={track.preview_url}
                         title={
                             <Link
                                 href={track.external_urls.spotify}

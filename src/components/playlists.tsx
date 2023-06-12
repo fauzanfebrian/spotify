@@ -41,13 +41,13 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                                 <h6 className="text-sm text-gray-300 -mt-1 text-center">{playlist.description}</h6>
                             </div>
                             <h6 className="text-center text-sm text-gray-400">{playlist.tracks?.total} songs</h6>
-                            <Link
-                                href={playlist.external_urls.spotify}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="absolute w-full h-full z-10"
-                            />
                         </div>
+                        <Link
+                            href={playlist.external_urls.spotify}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="absolute w-full h-full z-10"
+                        />
                     </div>
                 ))}
             </Carousel>
