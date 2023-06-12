@@ -32,7 +32,7 @@ export default function Artists({ artists }: { artists: SpotifyArtist[] }) {
                                 {artist.name}
                             </Link>
                         }
-                        fullRounded={showAll}
+                        full={showAll}
                     />
                 ))}
             </Carousel>

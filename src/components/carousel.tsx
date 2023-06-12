@@ -62,12 +62,16 @@ export default function Carousel({ children, isGrabbing, setIsGrabbing, showAll 
         containerRef.current.touchStartScrollLeft = undefined
     }
 
+    if (showAll)
+        return (
+            <div className="card-container mt-3 flex items-center overflow-x-scroll gap-4 flex-wrap justify-center">
+                {children}
+            </div>
+        )
+
     return (
         <div
-            className={[
-                'card-container mt-3 flex items-center overflow-x-scroll gap-4',
-                showAll ? 'flex-wrap justify-center' : 'flex-nowrap justify-start',
-            ].join(' ')}
+            className="card-container mt-3 flex items-center overflow-x-scroll gap-4 flex-nowrap justify-start"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}

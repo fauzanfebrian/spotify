@@ -33,11 +33,14 @@ export default function Tracks({ tracks }: { tracks: SpotifyTrack[] }) {
                             </Link>
                         }
                         subTitle={
-                            <Link href={track?.album?.external_urls?.spotify} className="text-sm text-gray-300">
+                            <Link
+                                href={track?.album?.external_urls?.spotify}
+                                className="text-xs text-gray-300 text-center"
+                            >
                                 {track.artists?.[0]?.name} - {track?.album?.name}
                             </Link>
                         }
-                        fullRounded={showAll}
+                        full={showAll}
                     />
                 ))}
             </Carousel>
