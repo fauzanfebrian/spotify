@@ -101,7 +101,7 @@ function getTopGenres(artists: SpotifyArtist[]) {
     const totalArtistGenres = genresShortedAndSpliced.reduce((curr, genre) => curr + genre.total, 0)
 
     const dataGenres = genresShortedAndSpliced.map(genre => {
-        genre.percentage = (genre.total / totalArtistGenres) * 100
+        genre.percentage = +((genre.total / totalArtistGenres) * 100).toFixed(2)
         return genre
     })
 
