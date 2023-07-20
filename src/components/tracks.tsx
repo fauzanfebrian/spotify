@@ -11,7 +11,7 @@ export default function Tracks({ tracks }: { tracks: SpotifyTrack[] }) {
     return (
         <section className={['my-10 w-full', isGrabbing ? 'select-none' : ''].join(' ')}>
             <div className="flex justify-between">
-                <h3 className="text-xl md:text-3xl text-white">Top track</h3>
+                <h3 className="text-xl md:text-3xl text-white">Top tracks</h3>
                 <button className="text-gray-400" onClick={() => setShowAll(!showAll)}>
                     {showAll ? 'Hide' : 'Show All'}
                 </button>

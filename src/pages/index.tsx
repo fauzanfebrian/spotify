@@ -2,6 +2,7 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useMemo } from 'react'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
 import Playlists from 'src/components/playlists'
@@ -11,6 +12,36 @@ import { getSpotifyData } from './api/spotify-data'
 
 export default function Home({ data }: { data?: SpotifyData }) {
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`
+
+    const metaDataLists = useMemo<[string, string][]>(
+        () =>
+            data
+                ? [
+                      ['description', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
+                      ['keywords', 'Spotify, top tracks, top artists, top genres, music, playlist, discover'],
+                      ['author', 'fauzanfebrian'],
+                      ['robots', 'index, follow'],
+                      ['og:title', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
+                      [
+                          'og:description',
+                          `Explore the top tracks, artists, and genres from ${data.user.display_name}'s personal Spotify account.`,
+                      ],
+                      ['og:type', 'website'],
+                      ['og:url', 'https://spotify.fauzanfebrian.my.id'],
+                      ['og:image', data.user.images?.[0].url],
+                      ['og:image:width', (data.user.images?.[0]?.width || 500).toString()],
+                      ['og:image:height', (data.user.images?.[0]?.height || 500).toString()],
+                      ['twitter:title', `${data.user.display_name}'s Top Tracks, Artists, and Genres on Spotify`],
+                      [
+                          'twitter:description',
+                          `Explore the top tracks, artists, and genres from ${data.user.display_name}'s personal Spotify account.`,
+                      ],
+                      ['twitter:image', data.user.images?.[0].url],
+                      ['twitter:card', 'summary_large_image'],
+                  ]
+                : [],
+        [data]
+    )
 
     if (!data) {
         return (
@@ -28,30 +59,6 @@ export default function Home({ data }: { data?: SpotifyData }) {
     }
 
     const { user, artists, tracks, genres, playlists } = data
-
-    const metaDataLists: [string, string][] = [
-        ['description', `Spotify statistics from ${user.display_name}'s personal Spotify account.`],
-        ['keywords', 'Spotify, top tracks, top artists, top genres, music, playlist, discover'],
-        ['author', 'fauzanfebrian'],
-        ['robots', 'index, follow'],
-        ['og:title', `Spotify statistics from ${user.display_name}'s personal Spotify account.`],
-        [
-            'og:description',
-            `Explore the top tracks, artists, and genres from ${user.display_name}'s personal Spotify account.`,
-        ],
-        ['og:type', 'website'],
-        ['og:url', 'https://spotify.fauzanfebrian.my.id'],
-        ['og:image', user.images?.[0].url],
-        ['og:image:width', (user.images?.[0]?.width || 500).toString()],
-        ['og:image:height', (user.images?.[0]?.height || 500).toString()],
-        ['twitter:title', `${user.display_name}'s Top Tracks, Artists, and Genres on Spotify`],
-        [
-            'twitter:description',
-            `Explore the top tracks, artists, and genres from ${user.display_name}'s personal Spotify account.`,
-        ],
-        ['twitter:image', user.images?.[0].url],
-        ['twitter:card', 'summary_large_image'],
-    ]
 
     return (
         <>
