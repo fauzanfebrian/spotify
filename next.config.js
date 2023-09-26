@@ -7,6 +7,7 @@ const nextConfig = {
         SPOTIFY_REFRESH_TOKEN: process.env.SPOTIFY_REFRESH_TOKEN,
         SPOTIFY_REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI,
         SPOTIFY_USER_ID: process.env.SPOTIFY_USER_ID,
+        HOTJAR_SITE_ID: process.env.HOTJAR_SITE_ID,
     },
     images: {
         domains: ['i.scdn.co', 'mosaic.scdn.co', 'images-ak.spotifycdn.com'],
