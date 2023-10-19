@@ -32,7 +32,7 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
 export async function getSpotifyData(): Promise<SpotifyData> {
     if (spotifyDataTtl > dayjs().toDate() && spotifyData) return spotifyData
 
-    await getToken()
+    await getAccessToken()
 
     const [artists, tracks, user, playlists] = await Promise.all([
         getTopArtists(),
@@ -52,7 +52,13 @@ export async function getSpotifyData(): Promise<SpotifyData> {
 }
 
 async function getTopArtists(): Promise<SpotifyArtist[]> {
-    const res = await axios.get('https://api.spotify.com/v1/me/top/artists?limit=30&offset=0&time_range=short_term')
+    const res = await axios.get('https://api.spotify.com/v1/me/top/artists', {
+        params: {
+            limit: 30,
+            offset: 0,
+            time_range: 'short_term',
+        },
+    })
     return res.data?.items || []
 }
 
@@ -66,7 +72,13 @@ async function getPlaylists(): Promise<SpotifyPlaylist[]> {
 }
 
 async function getTopTracks(): Promise<SpotifyTrack[]> {
-    const res = await axios.get('https://api.spotify.com/v1/me/top/tracks?limit=10&offset=0&time_range=short_term')
+    const res = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
+        params: {
+            limit: 10,
+            offset: 0,
+            time_range: 'short_term',
+        },
+    })
     return res.data?.items || []
 }
 
@@ -80,15 +92,18 @@ function getTopGenres(artists: SpotifyArtist[]) {
     const mappedGenres = artists
         .flatMap(artist => artist.genres)
         .reduce((object, genre) => {
-            if (!object[genre]) object[genre] = { name: genre, total: 1, percentage: 0 }
-            else object[genre].total += 1
+            if (!object[genre]) {
+                object[genre] = { name: genre, total: 1, percentage: 0 }
+            } else {
+                object[genre].total += 1
+            }
 
             return object
         }, {} as Record<string, SpotifyGenre>)
 
     const genres = Object.values(mappedGenres)
 
-    const genresShortedAndSpliced = genres
+    const dataGenres = genres
         .sort((a, b) => {
             if (b.total === a.total) {
                 if (b.name < a.name) return 1
@@ -98,17 +113,17 @@ function getTopGenres(artists: SpotifyArtist[]) {
         })
         .splice(0, 10)
 
-    const totalArtistGenres = genresShortedAndSpliced.reduce((curr, genre) => curr + genre.total, 0)
+    const totalArtistInGenres = dataGenres.reduce((curr, genre) => curr + genre.total, 0)
 
-    const dataGenres = genresShortedAndSpliced.map(genre => {
-        genre.percentage = +((genre.total / totalArtistGenres) * 100).toFixed(2)
-        return genre
+    dataGenres.forEach(genre => {
+        const percentage = (genre.total / totalArtistInGenres) * 100
+        genre.percentage = +percentage.toFixed(2)
     })
 
     return dataGenres
 }
 
-const getToken = async () => {
+const getAccessToken = async () => {
     if (expireToken > dayjs().toDate()) return
 
     const clientId = process.env.SPOTIFY_CLIENT_ID
