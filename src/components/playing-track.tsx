@@ -8,7 +8,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
     const track = playingTrack.item
 
     return (
-        <section className="mt-28 mb-10 w-full">
+        <section className="mt-20 mb-10 w-full">
             <div className="flex mt-8 max-sm:flex-wrap gap-6 max-sm:justify-center items-center">
                 <div className="w-40 h-w-40 relative rounded flex items-center justify-center">
                     <Image src={Plate} alt="plate" width={500} height={500} className="animate-spin absolute z-0" />
