@@ -31,7 +31,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
                     </Link>
                     <Link
                         href={track?.album?.external_urls?.spotify}
-                        className="text-xs text-gray-300 max-sm:text-center block"
+                        className="text-gray-300 max-sm:text-center block"
                     >
                         {track.artists?.[0]?.name} - {track?.album?.name}
                     </Link>
