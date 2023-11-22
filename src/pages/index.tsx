@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -5,6 +6,7 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
+import PlayingTrack from 'src/components/playing-track'
 import Playlists from 'src/components/playlists'
 import Tracks from 'src/components/tracks'
 import { SpotifyData } from 'src/interface'
@@ -58,7 +60,7 @@ export default function Home({ data }: { data?: SpotifyData }) {
         )
     }
 
-    const { user, artists, tracks, genres, playlists } = data
+    const { user, artists, tracks, genres, playlists, playingTrack } = data
 
     return (
         <>
@@ -92,6 +94,9 @@ export default function Home({ data }: { data?: SpotifyData }) {
                         </h1>
                     </section>
                 )}
+                {!!playingTrack?.is_playing && playingTrack.currently_playing_type === 'track' && (
+                    <PlayingTrack playingTrack={playingTrack} />
+                )}
                 {!!playlists?.length && <Playlists playlists={playlists} />}
                 {!!artists?.length && <Artists artists={artists} />}
                 {!!tracks?.length && <Tracks tracks={tracks} />}
@@ -106,6 +111,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
         const data = await getSpotifyData()
         return Promise.resolve({ props: { data } })
     } catch (error) {
+        if (error instanceof AxiosError) {
+            console.log(error.response?.data)
+        }
         return Promise.resolve({ props: { data: null } })
     }
 }

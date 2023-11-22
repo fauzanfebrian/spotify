@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { SpotifyToken } from 'src/interface'
+import { SpotifyToken } from 'src/interface/token'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {

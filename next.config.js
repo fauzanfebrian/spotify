@@ -10,7 +10,13 @@ const nextConfig = {
         HOTJAR_SITE_ID: process.env.HOTJAR_SITE_ID,
     },
     images: {
-        domains: ['i.scdn.co', 'mosaic.scdn.co', 'images-ak.spotifycdn.com', 'image-cdn-ak.spotifycdn.com'],
+        domains: [
+            'i.scdn.co',
+            'mosaic.scdn.co',
+            'images-ak.spotifycdn.com',
+            'image-cdn-ak.spotifycdn.com',
+            'image-cdn-fa.spotifycdn.com',
+        ],
     },
 }
 

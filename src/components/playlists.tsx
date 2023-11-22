@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { SpotifyPlaylist } from 'src/interface'
+import { SpotifyPlaylist } from 'src/interface/playlist'
 import Carousel from './carousel'
 
 export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] }) {

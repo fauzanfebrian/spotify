@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import { SpotifyArtist } from 'src/interface'
+import { SpotifyArtist } from 'src/interface/artist'
 import Card from './card'
 import Carousel from './carousel'
 

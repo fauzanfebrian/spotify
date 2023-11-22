@@ -1,18 +1,15 @@
 import axios, { AxiosError } from 'axios'
 import dayjs from 'dayjs'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {
-    SpotifyArtist,
-    SpotifyData,
-    SpotifyGenre,
-    SpotifyPlaylist,
-    SpotifyToken,
-    SpotifyTrack,
-    SpotifyUser,
-} from 'src/interface'
+import { SpotifyData } from 'src/interface'
+import { SpotifyArtist } from 'src/interface/artist'
+import { SpotifyGenre } from 'src/interface/genre'
+import { PlayingTrack } from 'src/interface/playing'
+import { SpotifyPlaylist } from 'src/interface/playlist'
+import { SpotifyToken } from 'src/interface/token'
+import { SpotifyTrack } from 'src/interface/track'
+import { SpotifyUser } from 'src/interface/user'
 
-let spotifyData: SpotifyData
-let spotifyDataTtl: Date
 let expireToken: Date
 
 export default async function handler(_req: NextApiRequest, res: NextApiResponse) {
@@ -30,23 +27,19 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
 }
 
 export async function getSpotifyData(): Promise<SpotifyData> {
-    if (spotifyDataTtl > dayjs().toDate() && spotifyData) return spotifyData
-
     await getAccessToken()
 
-    const [artists, tracks, user, playlists] = await Promise.all([
+    const [artists, tracks, user, playlists, playingTrack] = await Promise.all([
         getTopArtists(),
         getTopTracks(),
         getUser(),
         getPlaylists(),
+        getPlayingTrack(),
     ])
 
     const genres = getTopGenres(artists)
 
-    const data: SpotifyData = { artists, tracks, genres, user, playlists }
-
-    spotifyData = data
-    spotifyDataTtl = dayjs().add(12, 'hour').toDate()
+    const data: SpotifyData = { artists, tracks, genres, user, playlists, playingTrack }
 
     return data
 }
@@ -85,6 +78,11 @@ async function getTopTracks(): Promise<SpotifyTrack[]> {
 async function getUser(): Promise<SpotifyUser> {
     const spotifyId = process.env.SPOTIFY_USER_ID
     const res = await axios.get(`https://api.spotify.com/v1/users/${spotifyId}`)
+    return res.data
+}
+
+async function getPlayingTrack(): Promise<PlayingTrack> {
+    const res = await axios.get('https://api.spotify.com/v1/me/player/currently-playing')
     return res.data
 }
 
