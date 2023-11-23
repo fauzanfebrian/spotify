@@ -12,6 +12,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
             <div className="flex mt-8 max-sm:flex-wrap gap-6 max-sm:justify-center items-center">
                 <div className="w-40 h-w-40 relative rounded flex items-center justify-center">
                     <Image
+                        loading="lazy"
                         src={Plate}
                         alt="plate"
                         width={500}
@@ -20,6 +21,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
                         priority
                     />
                     <Image
+                        loading="lazy"
                         src={track.album.images?.[0]?.url}
                         width={125}
                         height={125}

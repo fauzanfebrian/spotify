@@ -19,6 +19,7 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                     >
                         <div className="w-full h-full absolute z-0 bg-playlist">
                             <Image
+                                loading="lazy"
                                 src={playlist.images?.[0].url}
                                 width={125}
                                 height={125}
@@ -28,6 +29,7 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                         </div>
                         <div className="w-full h-28 relative z-10 bg-green-600 p-3 box-border mb-3">
                             <Image
+                                loading="lazy"
                                 src={playlist.images?.[0].url}
                                 width={125}
                                 height={125}
