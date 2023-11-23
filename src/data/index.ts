@@ -14,7 +14,7 @@ let cacheTTL: Date
 export async function spotifyData(): Promise<SpotifyData> {
     await accessToken()
 
-    if (new Date() > cacheTTL && cacheData) {
+    if (cacheTTL > new Date() && cacheData) {
         cacheData.playingTrack = await currentlyPlayingTrack()
 
         return cacheData

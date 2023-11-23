@@ -3,7 +3,8 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import axios from 'src/axios'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
 import PlayingTrack from 'src/components/playing-track'
@@ -12,7 +13,9 @@ import Tracks from 'src/components/tracks'
 import { spotifyData } from 'src/data'
 import { SpotifyData } from 'src/interface'
 
-export default function Home({ data }: { data?: SpotifyData }) {
+export default function Home(props: { data?: SpotifyData }) {
+    const [data, setData] = useState(props.data)
+
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`
 
     const metaDataLists = useMemo<[string, string][]>(
@@ -44,6 +47,21 @@ export default function Home({ data }: { data?: SpotifyData }) {
                 : [],
         [data]
     )
+
+    useEffect(() => {
+        const actionId = setTimeout(async () => {
+            try {
+                const res = await axios.get<SpotifyData>('/spotify-data')
+                setData(res.data)
+            } catch (error) {
+                return
+            }
+        }, 1000 * 5)
+
+        return () => {
+            clearTimeout(actionId)
+        }
+    }, [data])
 
     if (!data) {
         return (
@@ -110,10 +128,11 @@ export default function Home({ data }: { data?: SpotifyData }) {
 export const getServerSideProps: GetServerSideProps = async () => {
     try {
         const data = await spotifyData()
+
         return Promise.resolve({ props: { data } })
     } catch (error) {
         if (error instanceof AxiosError) {
-            console.log(error.response?.data)
+            console.error(error.response?.data)
         }
         return Promise.resolve({ props: { data: null } })
     }

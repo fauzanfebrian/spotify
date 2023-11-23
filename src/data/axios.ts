@@ -8,7 +8,7 @@ const axios = axiosDefault.create({
 
 let tokenTTL: Date
 export async function accessToken() {
-    if (tokenTTL > dayjs().toDate()) return
+    if (tokenTTL > new Date()) return
 
     const clientId = process.env.SPOTIFY_CLIENT_ID
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET
