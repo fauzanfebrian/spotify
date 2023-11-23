@@ -5,16 +5,16 @@ import { RefObject, useEffect, useState } from 'react'
 import { AppContext } from 'src/context'
 import 'src/styles/globals.css'
 
+const hotjarSiteId = +(process.env.HOTJAR_SITE_ID as string)
+const gTagId = process.env.GOOGLE_TAG_ID as string
+
 export default function App({ Component, pageProps }: AppProps) {
     const [audioPlayer, setAudioPlayer] = useState<RefObject<HTMLAudioElement>>()
 
     useEffect(() => {
-        const siteId = +(process.env.HOTJAR_SITE_ID as string)
-        const hotjarVersion = 6
+        if (!hotjarSiteId) return
 
-        if (!siteId) return
-
-        Hotjar.init(siteId, hotjarVersion)
+        Hotjar.init(hotjarSiteId, 6)
     }, [])
 
     const playAudio = (player: RefObject<HTMLAudioElement>) => {
@@ -30,14 +30,19 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-XPKPDC3WSB" />
-            <Script id="google-analytics">
-                {`window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                gtag('config', 'G-XPKPDC3WSB');`}
-            </Script>
+            {!!gTagId && (
+                <>
+                    <Script src={`https://www.googletagmanager.com/gtag/js?id=${gTagId}`} />
+                    <Script id="google-analytics">
+                        {`
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${gTagId}');
+                        `}
+                    </Script>
+                </>
+            )}
             <AppContext.Provider value={{ playAudio, pauseAudio }}>
                 <Component {...pageProps} />
             </AppContext.Provider>

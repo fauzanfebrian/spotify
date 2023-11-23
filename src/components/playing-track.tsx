@@ -11,7 +11,14 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
         <section className="mt-20 mb-10 w-full">
             <div className="flex mt-8 max-sm:flex-wrap gap-6 max-sm:justify-center items-center">
                 <div className="w-40 h-w-40 relative rounded flex items-center justify-center">
-                    <Image src={Plate} alt="plate" width={500} height={500} className="animate-spin absolute z-0" />
+                    <Image
+                        src={Plate}
+                        alt="plate"
+                        width={500}
+                        height={500}
+                        className="animate-spin absolute z-0"
+                        priority
+                    />
                     <Image
                         src={track.album.images?.[0]?.url}
                         width={125}
@@ -20,7 +27,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
                         className="rounded-full relative z-10"
                     />
                 </div>
-                <div className="bg-opacity-40 relative max-w-xs">
+                <div className="bg-opacity-40 relative max-w-xs max-sm:w-full">
                     <Link
                         href={track.external_urls.spotify}
                         className="text-lg text-white max-sm:text-center block mb-2"

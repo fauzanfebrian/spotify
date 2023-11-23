@@ -9,8 +9,8 @@ import Genres from 'src/components/genres'
 import PlayingTrack from 'src/components/playing-track'
 import Playlists from 'src/components/playlists'
 import Tracks from 'src/components/tracks'
+import { spotifyData } from 'src/data'
 import { SpotifyData } from 'src/interface'
-import { getSpotifyData } from './api/spotify-data'
 
 export default function Home({ data }: { data?: SpotifyData }) {
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`
@@ -21,7 +21,7 @@ export default function Home({ data }: { data?: SpotifyData }) {
                 ? [
                       ['description', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
                       ['keywords', 'Spotify, top tracks, top artists, top genres, music, playlist, discover'],
-                      ['author', 'fauzanfebrian'],
+                      ['author', `${data.user.display_name}`],
                       ['robots', 'index, follow'],
                       ['og:title', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
                       [
@@ -108,7 +108,7 @@ export default function Home({ data }: { data?: SpotifyData }) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
     try {
-        const data = await getSpotifyData()
+        const data = await spotifyData()
         return Promise.resolve({ props: { data } })
     } catch (error) {
         if (error instanceof AxiosError) {

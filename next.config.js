@@ -8,6 +8,7 @@ const nextConfig = {
         SPOTIFY_REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI,
         SPOTIFY_USER_ID: process.env.SPOTIFY_USER_ID,
         HOTJAR_SITE_ID: process.env.HOTJAR_SITE_ID,
+        GOOGLE_TAG_ID: process.env.GOOGLE_TAG_ID,
     },
     images: {
         domains: [
