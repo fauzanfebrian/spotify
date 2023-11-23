@@ -2,7 +2,9 @@ import axiosDefault from 'axios'
 import dayjs from 'dayjs'
 import { SpotifyToken } from 'src/interface/token'
 
-const axios = axiosDefault.create()
+const axios = axiosDefault.create({
+    baseURL: 'https://api.spotify.com/v1',
+})
 
 let tokenTTL: Date
 export async function accessToken() {
