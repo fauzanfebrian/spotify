@@ -12,7 +12,6 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
             <div className="flex mt-8 max-sm:flex-wrap gap-6 max-sm:justify-center items-center">
                 <div className="w-40 h-w-40 relative rounded flex items-center justify-center">
                     <Image
-                        loading="lazy"
                         src={Plate}
                         alt="plate"
                         width={500}
@@ -26,23 +25,29 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
                         width={125}
                         height={125}
                         alt={`Image`}
-                        className="rounded-full relative z-10"
+                        className="rounded-full relative z-10 w-auto h-auto"
                     />
                 </div>
                 <div className="bg-opacity-40 relative max-w-xs max-sm:w-full">
                     <Link
                         href={track.external_urls.spotify}
-                        className="text-lg text-white max-sm:text-center block mb-2"
+                        className="text-lg text-green-600 max-sm:text-center block mb-3"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         {track.name}
                     </Link>
                     <Link
-                        href={track?.album?.external_urls?.spotify}
-                        className="text-gray-300 max-sm:text-center block"
+                        href={track?.artists?.[0]?.external_urls?.spotify || '#'}
+                        className="text-white max-sm:text-center block text-base"
                     >
-                        {track.artists?.[0]?.name} - {track?.album?.name}
+                        {track.artists?.[0]?.name}
+                    </Link>
+                    <Link
+                        href={track?.album?.external_urls?.spotify}
+                        className="text-gray-300 max-sm:text-center block text-sm"
+                    >
+                        {track?.album?.name}
                     </Link>
                 </div>
             </div>
