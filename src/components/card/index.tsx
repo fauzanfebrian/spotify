@@ -21,6 +21,7 @@ export default function Card({ full, thumbnailUrl, title, subTitle, trackPreview
                 <div className={['w-32 h-32 mr-3 relative', full ? 'rounded-l-lg' : 'rounded-l-sm'].join(' ')}>
                     {!!thumbnailUrl && (
                         <Image
+                            loading="lazy"
                             src={thumbnailUrl}
                             width={125}
                             height={125}
