@@ -11,13 +11,7 @@ const nextConfig = {
         GOOGLE_TAG_ID: process.env.GOOGLE_TAG_ID,
     },
     images: {
-        domains: [
-            'i.scdn.co',
-            'mosaic.scdn.co',
-            'images-ak.spotifycdn.com',
-            'image-cdn-ak.spotifycdn.com',
-            'image-cdn-fa.spotifycdn.com',
-        ],
+        remotePatterns: [{ hostname: '*.scdn.co' }, { hostname: '*.spotifycdn.com' }],
     },
 }
 
