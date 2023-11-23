@@ -56,7 +56,7 @@ export default function Home(props: { data?: SpotifyData }) {
             } catch (error) {
                 return
             }
-        }, 1000 * 10)
+        }, 1000 * 5)
 
         return () => {
             clearTimeout(actionId)
