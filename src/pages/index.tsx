@@ -13,6 +13,8 @@ import Tracks from 'src/components/tracks'
 import { spotifyData } from 'src/data'
 import { SpotifyData } from 'src/interface'
 
+const URL = process.env.SPOTIFY_REDIRECT_URI?.split('/').splice(0, 3).join('/') || 'https://spotify.fauzanfebrian.my.id'
+
 export default function Home(props: { data?: SpotifyData }) {
     const [data, setData] = useState(props.data)
 
@@ -32,7 +34,7 @@ export default function Home(props: { data?: SpotifyData }) {
                           `Explore the top tracks, artists, and genres from ${data.user.display_name}'s personal Spotify account.`,
                       ],
                       ['og:type', 'website'],
-                      ['og:url', 'https://spotify.fauzanfebrian.my.id'],
+                      ['og:url', URL],
                       ['og:image', data.user.images?.[0].url],
                       ['og:image:width', (data.user.images?.[0]?.width || 500).toString()],
                       ['og:image:height', (data.user.images?.[0]?.height || 500).toString()],
