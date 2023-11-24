@@ -3,52 +3,21 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'src/axios'
 import Artists from 'src/components/artists'
 import Genres from 'src/components/genres'
+import Metadata from 'src/components/metadata'
 import PlayingTrack from 'src/components/playing-track'
 import Playlists from 'src/components/playlists'
 import Tracks from 'src/components/tracks'
 import { spotifyData } from 'src/data'
 import { SpotifyData } from 'src/interface'
 
-const URL = process.env.SPOTIFY_REDIRECT_URI?.split('/').splice(0, 3).join('/') || 'https://spotify.fauzanfebrian.my.id'
-
 export default function Home(props: { data?: SpotifyData }) {
     const [data, setData] = useState(props.data)
 
     const spotifyLink = `https://open.spotify.com/user/${process.env.SPOTIFY_USER_ID}`
-
-    const metaDataLists = useMemo<[string, string][]>(
-        () =>
-            data
-                ? [
-                      ['description', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
-                      ['keywords', 'Spotify, top tracks, top artists, top genres, music, playlist, discover'],
-                      ['author', `${data.user.display_name}`],
-                      ['robots', 'index, follow'],
-                      ['og:title', `Spotify statistics from ${data.user.display_name}'s personal Spotify account.`],
-                      [
-                          'og:description',
-                          `Explore the top tracks, artists, and genres from ${data.user.display_name}'s personal Spotify account.`,
-                      ],
-                      ['og:type', 'website'],
-                      ['og:url', URL],
-                      ['og:image', data.user.images?.[0].url],
-                      ['og:image:width', (data.user.images?.[0]?.width || 500).toString()],
-                      ['og:image:height', (data.user.images?.[0]?.height || 500).toString()],
-                      ['twitter:title', `${data.user.display_name}'s Top Tracks, Artists, and Genres on Spotify`],
-                      [
-                          'twitter:description',
-                          `Explore the top tracks, artists, and genres from ${data.user.display_name}'s personal Spotify account.`,
-                      ],
-                      ['twitter:image', data.user.images?.[0].url],
-                      ['twitter:card', 'summary_large_image'],
-                  ]
-                : [],
-        [data]
-    )
 
     useEffect(() => {
         const actionId = setTimeout(async () => {
@@ -85,11 +54,7 @@ export default function Home(props: { data?: SpotifyData }) {
     return (
         <>
             <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>{`${user.display_name}'s Spotify statistics`}</title>
-                {metaDataLists.map(([name, content], index) => (
-                    <meta name={name} content={content} key={`metadata-${index}`} />
-                ))}
+                <Metadata data={data} />
             </Head>
             <main className="bg-img min-h-screen p-4 py-8 md:p-8 overflow-hidden">
                 {!!user && (
