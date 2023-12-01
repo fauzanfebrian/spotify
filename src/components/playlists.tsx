@@ -23,7 +23,7 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                                 src={playlist.images?.[0].url}
                                 width={125}
                                 height={125}
-                                alt={`${playlist.name} Image`}
+                                alt={`Playlist ${playlist.name} image`}
                                 className="w-full h-full rounded-sm z-0"
                             />
                         </div>
@@ -33,7 +33,7 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                                 src={playlist.images?.[0].url}
                                 width={125}
                                 height={125}
-                                alt={`${playlist.name} Image`}
+                                alt={`Playlist ${playlist.name} image`}
                                 className="m-auto w-28 h-28 rounded-sm z-0"
                             />
                         </div>

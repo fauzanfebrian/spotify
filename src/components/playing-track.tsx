@@ -24,7 +24,7 @@ export default function PlayingTrack({ playingTrack }: { playingTrack: PlayingTr
                         src={track.album.images?.[0]?.url}
                         width={125}
                         height={125}
-                        alt={`Image`}
+                        alt={`Image Playing Track`}
                         className="rounded-full relative z-10 w-auto h-auto"
                     />
                 </div>

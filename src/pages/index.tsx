@@ -63,7 +63,7 @@ export default function Home(props: { data?: SpotifyData }) {
                 />
                 <meta
                     name="keywords"
-                    content="Spotify, music, statistics, top genres, top artists, top tracks, playlist, currently playing track"
+                    content={`Spotify, Spotify statistic,music, statistic, statistics, top genres, top artists, top tracks, playlist, currently playing track, ${data.user.display_name} spotify, ${data.user.display_name} spotify statistic, ${data.user.display_name}`}
                 />
                 <meta name="author" content={data.user.display_name} />
 
@@ -86,7 +86,7 @@ export default function Home(props: { data?: SpotifyData }) {
 
                 <link rel="icon" href={data.user.images[0].url} />
 
-                <title>{`${data.user.display_name}'s Spotify Statistics`}</title>
+                <title>{`${data.user.display_name}'s Spotify Statistic`}</title>
             </Head>
             <main className="bg-img min-h-screen p-4 py-8 md:p-8 overflow-hidden">
                 {!!user && (
