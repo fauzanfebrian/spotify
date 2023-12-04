@@ -48,8 +48,10 @@ export default function Playlists({ playlists }: { playlists: SpotifyPlaylist[] 
                             href={playlist.external_urls.spotify}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="absolute w-full h-full z-10"
-                        />
+                            className="absolute w-full h-full z-10 text-center flex items-center justify-center text-transparent"
+                        >
+                            See playlist {playlist.name}
+                        </Link>
                     </div>
                 ))}
             </Carousel>
