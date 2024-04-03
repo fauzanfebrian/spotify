@@ -2,9 +2,9 @@
 import { animated, to as interpolate, useSprings } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { SpotifyData } from '../types'
-import Link from 'next/link'
 
 const to = (i: number) => ({
     x: 0,
@@ -79,13 +79,15 @@ export default function Artists({ data }: { data: SpotifyData }) {
                                         transform: interpolate([rot, scale], trans),
                                     }}
                                 >
-                                    <Image
-                                        alt={artist.name}
-                                        src={artist.images[0].url}
-                                        width={208}
-                                        height={208}
-                                        className="touch-none max-h-72"
-                                    />
+                                    <div className="w-52 h-52">
+                                        <Image
+                                            alt={artist.name}
+                                            src={artist.images[0].url}
+                                            width={208}
+                                            height={208}
+                                            className="touch-none h-52 bg-cover"
+                                        />
+                                    </div>
                                     <div className="flex-1 p-3 overflow-hidden">
                                         <Link
                                             href={artist.external_urls.spotify}

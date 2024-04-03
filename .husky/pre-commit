@@ -3,9 +3,11 @@
 echo "check formating"
 npm run format:check || (
     echo "prettier check failed, run \"npm run format\" first"
+    false
 )
 npm run lint || (
     echo "lint check failed, recheck your code"
+    false
 )
 
 echo "check ts"

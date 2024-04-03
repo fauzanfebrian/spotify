@@ -3,8 +3,10 @@ import { animated, to as interpolate, useSprings } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { HomeContext } from '../context'
 import { SpotifyData } from '../types'
+import TrackPreview from './track-preview'
 
 const to = (i: number) => ({
     x: 0,
@@ -27,11 +29,14 @@ export default function Tracks({ data }: { data: SpotifyData }) {
         from: from(i),
     }))
 
+    const { pauseAudio } = useContext(HomeContext)
+
     const bind = useDrag(({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
         const trigger = velocity[0] > 0.2
         const dir = xDir < 0 ? -1 : 1
         if (!down && trigger) {
             gone.add(index)
+            pauseAudio()
         }
         api.start(i => {
             if (index !== i) return
@@ -74,18 +79,21 @@ export default function Tracks({ data }: { data: SpotifyData }) {
                             >
                                 <animated.div
                                     {...bind(i)}
-                                    className="bg-green-600 bg-opacity-90 w-52 h-80 will-change-transform rounded-lg overflow-hidden flex flex-col justify-between shadow-deck"
+                                    className="bg-green-600 bg-opacity-90 w-52 h-80 will-change-transform rounded-lg overflow-hidden flex flex-col justify-between shadow-deck touch-none"
                                     style={{
                                         transform: interpolate([rot, scale], trans),
                                     }}
                                 >
-                                    <Image
-                                        alt={track.name}
-                                        src={track.album.images[0].url}
-                                        width={208}
-                                        height={208}
-                                        className="touch-none max-h-72"
-                                    />
+                                    <div className="w-52 h-52 relative">
+                                        <Image
+                                            alt={track.name}
+                                            src={track.album.images[0].url}
+                                            width={208}
+                                            height={208}
+                                            className="touch-none h-52 bg-cover"
+                                        />
+                                        {!!track.preview_url && <TrackPreview url={track.preview_url} />}
+                                    </div>
                                     <div className="flex-1 p-3 overflow-hidden">
                                         <Link
                                             href={track.external_urls.spotify}
