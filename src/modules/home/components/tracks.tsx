@@ -7,18 +7,7 @@ import { useContext, useState } from 'react'
 import { HomeContext } from '../context'
 import { SpotifyData } from '../types'
 import TrackPreview from './track-preview'
-
-const to = (i: number) => ({
-    x: 0,
-    y: i * -4,
-    scale: 1,
-    rot: -10 + Math.random() * 20,
-    delay: i * 100,
-})
-const from = (_i: number) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 })
-
-const trans = (r: number, s: number) =>
-    `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`
+import { from, to, trans } from '../utils/deck'
 
 export default function Tracks({ data }: { data: SpotifyData }) {
     const [tracks] = useState([...data.tracks].reverse())
@@ -63,8 +52,8 @@ export default function Tracks({ data }: { data: SpotifyData }) {
     })
 
     return (
-        <section className="relative">
-            <h2 className="text-2xl text-white text-center mb-6 md:mb-1">Top Tracks</h2>
+        <section className="relative w-full">
+            <h2 className="text-2xl text-white text-center mb-6 md:mb-3">Top Tracks</h2>
 
             <div className="flex items-center justify-center">
                 <div className="w-80 h-96 pt-24 box-border">

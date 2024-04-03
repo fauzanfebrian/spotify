@@ -5,18 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SpotifyData } from '../types'
-
-const to = (i: number) => ({
-    x: 0,
-    y: i * -4,
-    scale: 1,
-    rot: -10 + Math.random() * 20,
-    delay: i * 100,
-})
-const from = (_i: number) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 })
-
-const trans = (r: number, s: number) =>
-    `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`
+import { from, to, trans } from '../utils/deck'
 
 export default function Artists({ data }: { data: SpotifyData }) {
     const [artists] = useState([...data.artists].reverse())
@@ -58,8 +47,8 @@ export default function Artists({ data }: { data: SpotifyData }) {
     })
 
     return (
-        <section className="relative">
-            <h2 className="text-2xl text-white text-center mb-6 md:mb-1">Top Artists</h2>
+        <section className="relative w-full">
+            <h2 className="text-2xl text-white text-center mb-6 md:mb-3">Top Artists</h2>
 
             <div className="flex items-center justify-center">
                 <div className="w-80 h-96 pt-24 box-border">
@@ -74,7 +63,7 @@ export default function Artists({ data }: { data: SpotifyData }) {
                             >
                                 <animated.div
                                     {...bind(i)}
-                                    className="bg-green-600 bg-opacity-90 w-52 h-80 will-change-transform rounded-lg overflow-hidden flex flex-col justify-between shadow-deck"
+                                    className="bg-green-600 bg-opacity-90 w-52 h-80 will-change-transform rounded-lg overflow-hidden flex flex-col justify-between shadow-deck touch-none"
                                     style={{
                                         transform: interpolate([rot, scale], trans),
                                     }}
