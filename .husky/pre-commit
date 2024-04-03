@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+echo "check formating"
+npm run format:check || (
+    echo "prettier check failed, run \"npm run format\" first"
+)
+npm run lint || (
+    echo "lint check failed, recheck your code"
+)
+
+echo "check ts"
+npx tsc --noEmit
