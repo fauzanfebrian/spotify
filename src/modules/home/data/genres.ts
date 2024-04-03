@@ -23,7 +23,7 @@ export function topGenres(artists: SpotifyArtist[]): SpotifyGenre[] {
         return b.total - a.total
     })
 
-    const topGenres = sortedGenres.slice(0, 10)
+    const topGenres = sortedGenres.slice(0, 5)
 
     const totalArtistInGenres = topGenres.reduce((total, genre) => total + genre.total, 0)
 
