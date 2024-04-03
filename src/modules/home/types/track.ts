@@ -1,10 +1,11 @@
 import { ExternalUrls, Image } from '.'
+import { SpotifyAlbum } from './album'
 import { SpotifyArtist } from './artist'
 
 export interface SpotifyTrack {
-    album: Album
+    album: SpotifyAlbum
     artists: Partial<SpotifyArtist>[]
-    available_markets: string[]
+    available_markets?: string[]
     disc_number: number
     duration_ms: number
     explicit: boolean
@@ -23,20 +24,4 @@ export interface SpotifyTrack {
 
 export interface ExternalIds {
     isrc: string
-}
-
-interface Album {
-    album_type: string
-    artists: Partial<SpotifyArtist>[]
-    available_markets: string[]
-    external_urls: ExternalUrls
-    href: string
-    id: string
-    images: Image[]
-    name: string
-    release_date: string
-    release_date_precision: string
-    total_tracks: number
-    type: string
-    uri: string
 }

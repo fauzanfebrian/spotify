@@ -4,7 +4,7 @@ import { SpotifyArtist } from './artist'
 export interface SpotifyAlbum {
     album_type: string
     artists: Partial<SpotifyArtist>[]
-    available_markets: string[]
+    available_markets?: string[]
     external_urls: ExternalUrls
     href: string
     id: string
@@ -16,5 +16,3 @@ export interface SpotifyAlbum {
     type: string
     uri: string
 }
-
-export interface Album {}
