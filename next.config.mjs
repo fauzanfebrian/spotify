@@ -31,6 +31,7 @@ const nextConfig = {
 
         return config
     },
+    cacheMaxMemorySize: 0, // disable default in-memory caching
 }
 
 export default nextConfig
