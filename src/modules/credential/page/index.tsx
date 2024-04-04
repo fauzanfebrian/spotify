@@ -26,24 +26,30 @@ export default function CredentialPage() {
     }
 
     return data ? (
-        <main className="flex h-screen w-screen justify-center items-center overflow-hidden flex-col">
-            <h4 className="text-center text-lg">Your token (click to copy)</h4>
+        <main className="flex h-screen w-full justify-center items-center overflow-hidden flex-col p-3">
+            <h4 className="text-center text-xl text-white">Your token (click to copy)</h4>
             <h6
-                className="text-center cursor-pointer text-gray-400 text-sm"
-                onClick={() => navigator.clipboard.writeText(data.token)}
+                className="text-center cursor-pointer text-gray-400 text-sm break-all mb-4"
+                onClick={() => {
+                    navigator.clipboard.writeText(data.token)
+                    alert('Token Copied')
+                }}
             >
                 {data.token}
             </h6>
-            <h4 className="text-center text-lg">Your refresh token (click to copy)</h4>
+            <h4 className="text-center text-xl text-white">Your refresh token (click to copy)</h4>
             <h6
-                className="text-center cursor-pointer text-gray-400 text-sm"
-                onClick={() => navigator.clipboard.writeText(data.refreshToken)}
+                className="text-center cursor-pointer text-gray-400 text-sm break-all"
+                onClick={() => {
+                    navigator.clipboard.writeText(data.refreshToken)
+                    alert('Token Copied')
+                }}
             >
                 {data.refreshToken}
             </h6>
         </main>
     ) : (
-        <main className="flex h-screen w-screen justify-center items-center overflow-hidden flex-col">
+        <main className="flex h-screen w-full justify-center items-center overflow-hidden flex-col">
             <h1 className="text-xl text-green-600 font-bold">What Do You Want Here!!!</h1>
         </main>
     )

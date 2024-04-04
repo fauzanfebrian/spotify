@@ -65,7 +65,7 @@ export default async function Home() {
     if (!data) {
         const spotifyLink = `https://open.spotify.com/user/${SPOTIFY_USER_ID}`
         return (
-            <main className="h-screen w-screen bg-img flex justify-center items-center">
+            <main className="h-screen w-screen max-w-full bg-img flex justify-center items-center">
                 <Link
                     href={spotifyLink}
                     className="text-green-600 font-gotham text-6xl"
