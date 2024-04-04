@@ -36,11 +36,6 @@ export async function accessToken() {
             config.headers.Authorization = `Bearer ${res.data.access_token}`
         }
 
-        config.params = {
-            ...(config.params || {}),
-            jid: new Date().getTime(),
-        }
-
         return config
     })
 }
