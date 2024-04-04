@@ -43,7 +43,7 @@ export default function Playlists({ data }: { data: SpotifyData }) {
                                         width={320}
                                         height={320}
                                         className="opacity-50 absolute top-0 left-0 bottom-0 right-0"
-                                        quality={40}
+                                        quality={30}
                                     />
                                     <div className="bg-black bg-opacity-50 relative z-10 w-full h-full text-white p-5 text-center flex items-center justify-between flex-col">
                                         <Image

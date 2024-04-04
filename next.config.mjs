@@ -3,6 +3,7 @@ const nextConfig = {
     reactStrictMode: false,
     images: {
         remotePatterns: [{ hostname: '*.scdn.co' }, { hostname: '*.spotifycdn.com' }],
+        unoptimized: true,
     },
     webpack(config) {
         config.module.rules.push({

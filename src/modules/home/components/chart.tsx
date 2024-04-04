@@ -39,7 +39,7 @@ export default function Chart({ data }: { data: SpotifyData }) {
                     return (
                         <div className="flex items-center gap-1" key={i}>
                             <div className="w-3 h-3" style={{ background: color }} />
-                            <p className="text-xs text-white">{title}</p>
+                            <p className="text-xs text-white capitalize">{title}</p>
                         </div>
                     )
                 })}

@@ -11,6 +11,7 @@ import User from '../components/user'
 import { HomeContext } from '../context'
 import '../styles/style.css'
 import { SpotifyData } from '../types'
+import PlayingTrack from '../components/playing-track'
 
 export default function HomePage(props: { data: SpotifyData }) {
     const [data, setData] = useState(props.data)
@@ -47,6 +48,7 @@ export default function HomePage(props: { data: SpotifyData }) {
             <main className="home-wrapper">
                 <div className="container h-auto mx-auto py-6 px-4">
                     <User data={data} />
+                    <PlayingTrack data={data} />
                     <Playlists data={data} />
                     <div className="flex items-start justify-center flex-col md:flex-row my-24 gap-y-12">
                         <Artists data={data} />
