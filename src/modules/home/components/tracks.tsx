@@ -62,7 +62,7 @@ export default function Tracks({ data }: { data: SpotifyData }) {
 
                         return (
                             <animated.div
-                                className="absolute w-80 h-52 will-change-transform flex items-center justify-center touch-none"
+                                className="absolute w-80 h-52 will-change-transform flex items-center justify-center"
                                 style={{ x, y }}
                                 key={i}
                             >
