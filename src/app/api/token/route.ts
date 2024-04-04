@@ -3,6 +3,8 @@ import { SpotifyToken } from '@/modules/home/types/token'
 import { responseJson } from '@/utils/response-json'
 import axios, { AxiosError } from 'axios'
 
+export const revalidate = 5
+
 export async function POST(req: Request) {
     try {
         const clientId = SPOTIFY_CLIENT_ID

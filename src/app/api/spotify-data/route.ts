@@ -3,6 +3,8 @@ import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
 import type { NextApiRequest } from 'next'
 
+export const revalidate = 5
+
 export async function GET(_req: NextApiRequest) {
     try {
         const data = await spotifyData()
