@@ -75,6 +75,7 @@ export default function Artists({ data }: { data: SpotifyData }) {
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"
+                                            quality={30}
                                         />
                                     </div>
                                     <div className="flex-1 p-3 overflow-hidden">

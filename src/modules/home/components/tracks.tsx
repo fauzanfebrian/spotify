@@ -80,6 +80,7 @@ export default function Tracks({ data }: { data: SpotifyData }) {
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"
+                                            quality={30}
                                         />
                                         {!!track.preview_url && <TrackPreview url={track.preview_url} />}
                                     </div>

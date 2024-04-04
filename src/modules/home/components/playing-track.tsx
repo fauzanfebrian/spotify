@@ -54,6 +54,7 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                                 width={90}
                                 height={90}
                                 className="rounded-full relative z-10"
+                                quality={50}
                             />
                         </div>
                         <div className="flex-1 flex flex-col justify-center items-start gap-y-2 h-full py-3">

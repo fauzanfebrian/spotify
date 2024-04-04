@@ -59,6 +59,7 @@ export default function Playlists({ data }: { data: SpotifyData }) {
                                                 width={120}
                                                 height={120}
                                                 className="rounded-lg"
+                                                quality={50}
                                             />
 
                                             <div className="relative">
