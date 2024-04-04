@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    @apply h-screen overflow-hidden;
+    @apply h-screen w-screen overflow-hidden;
     background-image: url('../assets/images/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -21,7 +21,8 @@
     z-index: 1;
 }
 
-:root > * {
+#app_wrapper {
+    @apply h-screen w-screen overflow-auto;
     z-index: 2;
     position: relative;
 }

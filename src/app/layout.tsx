@@ -24,7 +24,9 @@ export default function RootLayout({
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </head>
-            <body className={poppims.className}>{children}</body>
+            <body className={poppims.className}>
+                <div id="app_wrapper">{children}</div>
+            </body>
 
             {!!GOOGLE_TAG_ID && (
                 <>

@@ -1,5 +1,5 @@
 .home-wrapper {
-    @apply relative h-screen overflow-auto w-full;
+    @apply relative w-full h-full;
 }
 
 .shadow-deck {
