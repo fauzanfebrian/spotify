@@ -1,8 +1,11 @@
 'use client'
 import axios from '@/axios'
 import { RefObject, useEffect, useState } from 'react'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
 import Artists from '../components/artists'
 import Genres from '../components/genres'
+import Playlists from '../components/playlists'
 import Tracks from '../components/tracks'
 import User from '../components/user'
 import { HomeContext } from '../context'
@@ -44,7 +47,8 @@ export default function HomePage(props: { data: SpotifyData }) {
             <main className="home-wrapper">
                 <div className="container h-auto mx-auto py-6 px-4">
                     <User data={data} />
-                    <div className="flex items-start justify-center flex-col md:flex-row my-12 gap-y-12">
+                    <Playlists data={data} />
+                    <div className="flex items-start justify-center flex-col md:flex-row my-24 gap-y-12">
                         <Artists data={data} />
                         <Genres data={data} />
                         <Tracks data={data} />

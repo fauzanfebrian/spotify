@@ -84,13 +84,15 @@ export default function Tracks({ data }: { data: SpotifyData }) {
                                         {!!track.preview_url && <TrackPreview url={track.preview_url} />}
                                     </div>
                                     <div className="flex-1 p-3 overflow-hidden">
-                                        <Link
-                                            href={track.external_urls.spotify}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <h3 className="text-black text-sm font-bold capitalize">{track.name}</h3>
-                                        </Link>
+                                        <h3 className="text-black text-sm font-bold capitalize">
+                                            <Link
+                                                href={track.external_urls.spotify}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {track.name}
+                                            </Link>
+                                        </h3>
                                         <Link
                                             href={track.album.external_urls.spotify}
                                             target="_blank"

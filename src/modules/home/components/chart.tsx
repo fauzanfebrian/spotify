@@ -34,7 +34,7 @@ export default function Chart({ data }: { data: SpotifyData }) {
                 }}
                 className="h-5/6"
             />
-            <div className="w-full flex items-center flex-wrap gap-1 h-1/6">
+            <div className="w-full flex items-center justify-center flex-wrap gap-1 h-1/6">
                 {datasource.map(({ color, title }, i) => {
                     return (
                         <div className="flex items-center gap-1" key={i}>

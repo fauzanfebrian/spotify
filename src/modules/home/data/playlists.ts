@@ -4,9 +4,9 @@ import axios from './axios'
 
 export async function userPlaylists(): Promise<SpotifyPlaylist[]> {
     const spotifyId = SPOTIFY_USER_ID
-    const res = await axios.get(`/users/${spotifyId}/playlists`)
+    const res = await axios.get<{ items: SpotifyPlaylist[] }>(`/users/${spotifyId}/playlists`)
 
-    const playlists: SpotifyPlaylist[] = res.data?.items || []
+    const playlists = res.data?.items || []
 
     return playlists.filter(playlist => playlist.public)
 }

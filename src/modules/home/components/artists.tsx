@@ -78,13 +78,15 @@ export default function Artists({ data }: { data: SpotifyData }) {
                                         />
                                     </div>
                                     <div className="flex-1 p-3 overflow-hidden">
-                                        <Link
-                                            href={artist.external_urls.spotify}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <h3 className="text-black text-sm font-bold capitalize">{artist.name}</h3>
-                                        </Link>
+                                        <h3 className="text-black text-sm font-bold capitalize">
+                                            <Link
+                                                href={artist.external_urls.spotify}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {artist.name}
+                                            </Link>
+                                        </h3>
                                         <p className="text-gray-500 text-xs text-left capitalize mt-1">
                                             {artist.genres.join(', ')}
                                         </p>

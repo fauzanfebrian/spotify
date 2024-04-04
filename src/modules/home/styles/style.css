@@ -1,5 +1,5 @@
 .home-wrapper {
-    @apply w-screen relative min-h-screen overflow-hidden;
+    @apply relative min-h-screen overflow-hidden w-full;
     background-image: url('../../../assets/images/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -26,4 +26,12 @@
     box-shadow:
         0 12.5px 100px -10px rgba(50, 50, 73, 0.2),
         0 10px 10px -10px rgba(50, 50, 73, 0.1);
+}
+
+.slick-dots li button:before {
+    @apply text-white font-bold;
+}
+
+.slick-dots li.slick-active button:before {
+    @apply text-green-600 font-bold;
 }
