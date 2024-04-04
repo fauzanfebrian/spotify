@@ -12,6 +12,7 @@ import { HomeContext } from '../context'
 import '../styles/style.css'
 import { SpotifyData } from '../types'
 import PlayingTrack from '../components/playing-track'
+import useInView from '@/hooks/useInView'
 
 export default function HomePage(props: { data: SpotifyData }) {
     const [data, setData] = useState(props.data)
@@ -43,17 +44,29 @@ export default function HomePage(props: { data: SpotifyData }) {
         }
     }, [data])
 
+    const inViewArtists = useInView()
+    const inViewGenres = useInView()
+    const inViewTracks = useInView()
+
     return (
         <HomeContext.Provider value={{ playAudio, pauseAudio }}>
             <main className="home-wrapper">
                 <div className="container h-auto mx-auto py-6 px-4">
                     <User data={data} />
-                    <PlayingTrack data={data} />
+                    {!!data.playingTrack?.is_playing && data.playingTrack.currently_playing_type === 'track' && (
+                        <PlayingTrack data={data} />
+                    )}
                     <Playlists data={data} />
                     <div className="flex items-start justify-center flex-col md:flex-row my-24 gap-y-12">
-                        <Artists data={data} />
-                        <Genres data={data} />
-                        <Tracks data={data} />
+                        <div className="w-full h-auto min-h-[440px]" ref={inViewArtists.ref}>
+                            {inViewArtists.inView && <Artists data={data} />}
+                        </div>
+                        <div className="w-full h-auto min-h-[440px]" ref={inViewGenres.ref}>
+                            {inViewGenres.inView && <Genres data={data} />}
+                        </div>
+                        <div className="w-full h-auto min-h-[440px]" ref={inViewTracks.ref}>
+                            {inViewTracks.inView && <Tracks data={data} />}
+                        </div>
                     </div>
                 </div>
             </main>
