@@ -30,8 +30,17 @@ export async function accessToken() {
     tokenTTL = dayjs()
         .add(res.data.expires_in - 60, 'second')
         .toDate()
+
     axios.interceptors.request.use(config => {
-        if (res.data.access_token) config.headers.Authorization = `Bearer ${res.data.access_token}`
+        if (res.data.access_token) {
+            config.headers.Authorization = `Bearer ${res.data.access_token}`
+        }
+
+        config.params = {
+            ...(config.params || {}),
+            jid: new Date().getTime(),
+        }
+
         return config
     })
 }
