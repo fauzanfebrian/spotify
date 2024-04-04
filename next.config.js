@@ -31,7 +31,8 @@ const nextConfig = {
 
         return config
     },
-    cacheMaxMemorySize: 0, // disable default in-memory caching
+    cacheMaxMemorySize: 0,
+    cacheHandler: require.resolve('./cache-handler.js'),
 }
 
-export default nextConfig
+module.exports = nextConfig
