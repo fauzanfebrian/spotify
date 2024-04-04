@@ -29,7 +29,7 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
     return (
         <animated.div style={{ clipPath }}>
             <section className="my-8 -mb-16">
-                <div className="max-w-full w-96 h-32 rounded-2xl bg-green-600 overflow-hidden relative">
+                <div className="max-w-full w-96 h-32 rounded-2xl bg-green-600 overflow-hidden relative mx-auto">
                     <Image
                         alt={track.name}
                         src={track.album.images[0].url}
