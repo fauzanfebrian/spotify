@@ -3,7 +3,7 @@ export const to = (i: number) => ({
     y: i * -4,
     scale: 1,
     rot: -10 + Math.random() * 20,
-    delay: i * 100,
+    delay: i * 75,
 })
 
 export const from = (_i: number) => ({ x: 0, rot: 0, scale: 1.15, y: -75 })
