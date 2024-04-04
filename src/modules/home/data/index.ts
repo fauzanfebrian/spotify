@@ -15,11 +15,11 @@ let cacheTTL: Date
 export async function spotifyData(): Promise<SpotifyData> {
     await accessToken()
 
-    // if (cacheTTL > new Date() && cacheData) {
-    //     cacheData.playingTrack = await currentlyPlayingTrack()
+    if (cacheTTL > new Date() && cacheData) {
+        cacheData.playingTrack = await currentlyPlayingTrack()
 
-    //     return cacheData
-    // }
+        return cacheData
+    }
 
     const [artists, tracks, user, playlists, playingTrack] = await Promise.all([
         topArtists(),
