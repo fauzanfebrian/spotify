@@ -1,4 +1,3 @@
-'use server'
 import dayjs from 'dayjs'
 import { SpotifyData } from '../types'
 import { topArtists } from './artists'

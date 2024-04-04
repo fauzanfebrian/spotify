@@ -1,4 +1,3 @@
-'use server'
 import { spotifyData } from '@/modules/home/data'
 import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
