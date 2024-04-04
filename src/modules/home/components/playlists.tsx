@@ -29,7 +29,7 @@ export default function Playlists({ data }: { data: SpotifyData }) {
     return (
         <animated.div style={{ opacity }}>
             <section className="my-24">
-                <h2 className="text-2xl text-white text-center md:text-left mb-6">Playlists</h2>
+                <h2 className="text-2xl text-white text-center mb-6">Playlists</h2>
 
                 <div className="px-0 md:px-6 box-border">
                     <Slider
