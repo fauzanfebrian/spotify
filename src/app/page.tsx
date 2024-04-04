@@ -57,6 +57,8 @@ export async function generateMetadata(_: any, parent: ResolvingMetadata): Promi
     }
 }
 
+export const revalidate = 5
+
 export default async function Home() {
     const data = await spotifyData().catch(() => null)
 
