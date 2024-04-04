@@ -17,6 +17,7 @@ if (process.env.GOOGLE_TAG_ID) {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    env,
     reactStrictMode: false,
     images: {
         remotePatterns: [{ hostname: '*.scdn.co' }, { hostname: '*.spotifycdn.com' }],
