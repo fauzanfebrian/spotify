@@ -1,9 +1,8 @@
+import { TrophyIcon } from '@/assets/icons'
 import { a, useSpring } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 import { SpotifyData } from '../types'
-import { PieChart, pieChartDefaultProps } from 'react-minimal-pie-chart'
 import Chart from './chart'
-import { TrophyIcon } from '@/assets/icons'
 
 export default function Genres({ data }: { data: SpotifyData }) {
     const [flipped, set] = useState(true)

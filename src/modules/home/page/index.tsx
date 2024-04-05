@@ -50,23 +50,21 @@ export default function HomePage(props: { data: SpotifyData }) {
 
     return (
         <HomeContext.Provider value={{ playAudio, pauseAudio }}>
-            <main className="home-wrapper">
-                <div className="container h-auto mx-auto py-6 px-4">
-                    <User data={data} />
-                    {!!data.playingTrack?.is_playing && data.playingTrack.currently_playing_type === 'track' && (
-                        <PlayingTrack data={data} />
-                    )}
-                    <Playlists data={data} />
-                    <div className="flex items-start justify-center flex-col md:flex-row my-24 gap-y-12">
-                        <div className="w-full h-auto min-h-[440px]" ref={inViewArtists.ref}>
-                            {inViewArtists.inView && <Artists data={data} />}
-                        </div>
-                        <div className="w-full h-auto min-h-[440px]" ref={inViewGenres.ref}>
-                            {inViewGenres.inView && <Genres data={data} />}
-                        </div>
-                        <div className="w-full h-auto min-h-[440px]" ref={inViewTracks.ref}>
-                            {inViewTracks.inView && <Tracks data={data} />}
-                        </div>
+            <main className="container h-auto mx-auto py-6 px-4">
+                <User data={data} />
+                {!!data.playingTrack?.is_playing && data.playingTrack.currently_playing_type === 'track' && (
+                    <PlayingTrack data={data} />
+                )}
+                <Playlists data={data} />
+                <div className="flex items-start justify-center flex-col md:flex-row my-24 gap-y-12">
+                    <div className="w-full h-auto min-h-[440px]" ref={inViewArtists.ref}>
+                        {inViewArtists.inView && <Artists data={data} />}
+                    </div>
+                    <div className="w-full h-auto min-h-[440px]" ref={inViewGenres.ref}>
+                        {inViewGenres.inView && <Genres data={data} />}
+                    </div>
+                    <div className="w-full h-auto min-h-[440px]" ref={inViewTracks.ref}>
+                        {inViewTracks.inView && <Tracks data={data} />}
                     </div>
                 </div>
             </main>

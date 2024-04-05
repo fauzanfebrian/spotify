@@ -3,28 +3,11 @@
 @tailwind utilities;
 
 :root {
-    @apply h-screen w-screen overflow-hidden relative bg-green-600;
-    background-image: url('../assets/images/background.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-:root::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    @apply min-h-screen w-screen relative overflow-x-hidden overflow-auto bg-green-600;
 }
 
 #app_wrapper {
-    @apply h-screen w-screen overflow-auto;
-    z-index: 2;
-    position: relative;
+    @apply relative z-10;
 }
 
 @layer utilities {

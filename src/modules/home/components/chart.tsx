@@ -5,11 +5,11 @@ export default function Chart({ data }: { data: SpotifyData }) {
     const lineWidth = 60
 
     const datasource = [
-        { title: data.genres[0].name, value: data.genres[0].percentage, color: '#dc2626' },
-        { title: data.genres[1].name, value: data.genres[1].percentage, color: '#4b5563' },
-        { title: data.genres[2].name, value: data.genres[2].percentage, color: '#2563eb' },
-        { title: data.genres[3].name, value: data.genres[3].percentage, color: '#d97706' },
-        { title: data.genres[4].name, value: data.genres[4].percentage, color: '#4f46e5' },
+        { title: data.genres[0].name, value: data.genres[0].percentage, color: '#018383' },
+        { title: data.genres[1].name, value: data.genres[1].percentage, color: '#02A8A8' },
+        { title: data.genres[2].name, value: data.genres[2].percentage, color: '#42E6A4' },
+        { title: data.genres[3].name, value: data.genres[3].percentage, color: '#F5DEA3' },
+        { title: data.genres[4].name, value: data.genres[4].percentage, color: '#444941' },
     ]
 
     return (

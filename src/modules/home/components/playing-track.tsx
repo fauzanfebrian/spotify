@@ -3,8 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { animated, useSpring } from 'react-spring'
 import { SpotifyData } from '../types'
+import { useEffect, useRef, useState } from 'react'
 
 export default function PlayingTrack({ data }: { data: SpotifyData }) {
+    const wrapperRef = useRef<HTMLDivElement>(null)
+    const [isSticky, setIsSticky] = useState(false)
+
     const { clipPath } = useSpring({
         from: {
             clipPath: 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%)',
@@ -17,19 +21,40 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
         },
     })
 
-    const playingTrack = data.playingTrack
+    useEffect(() => {
+        const element = wrapperRef.current
+        if (!element) {
+            return
+        }
 
-    if (!playingTrack?.is_playing || playingTrack.currently_playing_type !== 'track') {
+        const checkIsSticky = () => {
+            setIsSticky(window.scrollY === element.offsetTop)
+        }
+        checkIsSticky()
+
+        window.addEventListener('scroll', checkIsSticky)
+        return () => {
+            window.removeEventListener('scroll', checkIsSticky)
+        }
+    }, [])
+
+    if (!data.playingTrack?.is_playing || data.playingTrack.currently_playing_type !== 'track') {
         return <></>
     }
 
-    const track = playingTrack.item
+    const track = data.playingTrack.item
     const artist = track.artists.map(artist => artist.name).join(', ')
 
     return (
-        <animated.div style={{ clipPath }}>
-            <section className="my-8 -mb-16">
-                <div className="max-w-full w-96 h-32 rounded-2xl bg-green-600 overflow-hidden relative mx-auto">
+        <animated.div style={{ clipPath, zIndex: 1000 }} className="sticky top-0 left-0" ref={wrapperRef}>
+            <section className={isSticky ? '' : 'my-8 -mb-16'}>
+                <div
+                    className={[
+                        'h-32 bg-green-600 overflow-hidden relative mx-auto transition-all',
+                        isSticky ? 'rounded-b-3xl' : 'rounded-2xl',
+                        isSticky ? 'w-full' : 'max-w-full w-96',
+                    ].join(' ')}
+                >
                     <Image
                         alt={track.name}
                         src={track.album.images[0].url}
@@ -38,7 +63,11 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                         height={128}
                         className="bg-cover object-cover w-full h-full absolute top-0 left-0 z-0"
                     />
-                    <div className="relative z-10 bg-black bg-opacity-50 text-white px-3 flex items-center justify-center gap-2 h-full w-full overflow-hidden">
+                    <div
+                        className={
+                            'relative z-10 bg-black bg-opacity-50 text-white px-3 flex items-center justify-center gap-2 h-full w-full overflow-hidden transition-all'
+                        }
+                    >
                         <div className="relative flex items-center justify-center w-28 h-28">
                             <Image
                                 alt="Plate"
@@ -57,7 +86,12 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                                 quality={50}
                             />
                         </div>
-                        <div className="flex-1 flex flex-col justify-center items-start gap-y-2 h-full py-3">
+                        <div
+                            className={[
+                                'flex flex-col justify-center items-start gap-y-2 h-full py-3 transition-all flex-1',
+                                isSticky ? 'flex-1 md:flex-initial' : 'flex-1',
+                            ].join(' ')}
+                        >
                             <div>
                                 <h6 className="text-base text-green-600">
                                     <Link href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
