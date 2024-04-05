@@ -3,8 +3,6 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import BackgroundImage from '@/assets/images/background.jpg'
-import Image from 'next/image'
 
 const poppims = Poppins({ weight: '400', subsets: ['latin'] })
 
@@ -28,12 +26,6 @@ export default function RootLayout({
             </head>
             <body className={poppims.className}>
                 <div id="app_wrapper">{children}</div>
-                <Image
-                    alt="bg-img"
-                    src={BackgroundImage}
-                    className="w-screen max-w-full h-screen fixed top-0 left-0 right-0 bottom-0 z-0 object-cover touch-none"
-                    quality={20}
-                />
             </body>
 
             {!!GOOGLE_TAG_ID && (
