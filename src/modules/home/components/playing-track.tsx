@@ -31,9 +31,12 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
             const different = window.scrollY - element.offsetTop
             const newStickyStatus = different <= 15 && different >= 0
 
-            if (newStickyStatus !== isSticky) {
-                setIsSticky(newStickyStatus)
-            }
+            setIsSticky(isSticky => {
+                if (newStickyStatus !== isSticky) {
+                    return newStickyStatus
+                }
+                return isSticky
+            })
         }
         checkIsSticky()
 
