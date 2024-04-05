@@ -1,13 +1,12 @@
 import PlateImg from '@/assets/images/plate.png'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
 import { SpotifyData } from '../types'
-import { useEffect, useRef, useState } from 'react'
 
 export default function PlayingTrack({ data }: { data: SpotifyData }) {
     const wrapperRef = useRef<HTMLDivElement>(null)
-    const [isSticky, setIsSticky] = useState(false)
 
     const { clipPath } = useSpring({
         from: {
@@ -21,26 +20,6 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
         },
     })
 
-    useEffect(() => {
-        const element = wrapperRef.current
-        if (!element) {
-            return
-        }
-
-        const checkIsSticky = () => {
-            const different = window.scrollY - element.offsetTop
-            const newStickyStatus = different <= 50 && different >= 0
-
-            setIsSticky(newStickyStatus)
-        }
-        checkIsSticky()
-
-        window.addEventListener('scroll', checkIsSticky)
-        return () => {
-            window.removeEventListener('scroll', checkIsSticky)
-        }
-    }, [])
-
     if (!data.playingTrack?.is_playing || data.playingTrack.currently_playing_type !== 'track') {
         return <></>
     }
@@ -50,14 +29,8 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
 
     return (
         <animated.div style={{ clipPath, zIndex: 1000 }} className="sticky top-0 left-0" ref={wrapperRef}>
-            <section className={isSticky ? '' : 'my-8 -mb-16'}>
-                <div
-                    className={[
-                        'h-32 bg-green-600 overflow-hidden relative mx-auto transition-all',
-                        isSticky ? 'rounded-b-3xl' : 'rounded-2xl',
-                        isSticky ? 'w-full' : 'max-w-full w-96',
-                    ].join(' ')}
-                >
+            <section className={'my-8 -mb-16'}>
+                <div className="h-32 bg-green-600 overflow-hidden relative mx-auto transition-all rounded-2xl max-w-full w-96">
                     <Image
                         alt={track.name}
                         src={track.album.images[0].url}
@@ -90,10 +63,9 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                             />
                         </div>
                         <div
-                            className={[
-                                'flex flex-col justify-center items-start gap-y-2 h-full py-3 transition-all flex-1',
-                                isSticky ? 'flex-1 md:flex-initial' : 'flex-1',
-                            ].join(' ')}
+                            className={
+                                'flex flex-col justify-center items-start gap-y-2 h-full py-3 transition-all flex-1'
+                            }
                         >
                             <div>
                                 <h6 className="text-base text-green-600">

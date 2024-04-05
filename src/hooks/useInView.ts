@@ -1,7 +1,7 @@
-import { IntersectionArgs, useInView as useInViewSpring } from 'react-spring'
+import { useInView as useInViewSpring } from 'react-spring'
 
-export default function useInView(args?: IntersectionArgs) {
-    const inView = useInViewSpring(args)
+export default function useInView() {
+    const inView = useInViewSpring({ once: true })
 
     return {
         ref: inView[0],
