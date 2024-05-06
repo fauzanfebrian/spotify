@@ -7,7 +7,7 @@
 }
 
 #app_wrapper {
-    @apply relative z-10 h-screen w-screen overflow-y-auto bg-black bg-opacity-40;
+    @apply relative z-10 h-screen w-screen overflow-y-auto overflow-x-hidden bg-black bg-opacity-40;
     z-index: 2;
     position: relative;
 }
