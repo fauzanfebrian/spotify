@@ -3,7 +3,7 @@ import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
 import type { NextApiRequest } from 'next'
 
-export const revalidate = 5
+export const revalidate = 0
 
 export async function GET(_req: NextApiRequest) {
     try {

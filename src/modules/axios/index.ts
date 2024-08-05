@@ -1,7 +1,7 @@
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } from '@/config'
 import axiosDefault from 'axios'
 import dayjs from 'dayjs'
-import { SpotifyToken } from '../types/token'
+import { SpotifyToken } from './token'
 
 const axios = axiosDefault.create({
     baseURL: 'https://api.spotify.com/v1',

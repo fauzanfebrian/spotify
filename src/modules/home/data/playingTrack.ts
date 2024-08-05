@@ -1,5 +1,5 @@
 import { PlayingTrack } from '../types/playing'
-import axios from './axios'
+import axios from '../../axios'
 
 export async function currentlyPlayingTrack(): Promise<PlayingTrack | undefined> {
     try {

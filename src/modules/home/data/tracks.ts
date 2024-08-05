@@ -1,5 +1,5 @@
 import { SpotifyTrack } from '../types/track'
-import axios from './axios'
+import axios from '../../axios'
 
 export async function topTracks(): Promise<SpotifyTrack[]> {
     const res = await axios.get<{ items: SpotifyTrack[] }>('/me/top/tracks', {

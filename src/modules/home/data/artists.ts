@@ -1,4 +1,4 @@
-import axios from './axios'
+import axios from '../../axios'
 import { SpotifyArtist } from '../types/artist'
 
 export async function topArtists(): Promise<SpotifyArtist[]> {

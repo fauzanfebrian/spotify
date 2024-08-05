@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { SpotifyData } from '../types'
 import { topArtists } from './artists'
-import { accessToken } from './axios'
+import { accessToken } from '../../axios'
 import { topGenres } from './genres'
 import { currentlyPlayingTrack } from './playingTrack'
 import { userPlaylists } from './playlists'
