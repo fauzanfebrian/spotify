@@ -1,11 +1,14 @@
-import { accessToken } from '@/modules/axios'
 import { playbackState } from './playback'
 import { playbackQueue } from './queue'
 
-export async function getPlayerData() {
-    await accessToken()
+export const revalidate = 0
 
+export async function getPlayerData() {
     const [state, queue] = await Promise.all([playbackState(), playbackQueue()])
+
+    if (!state) {
+        return null
+    }
 
     return {
         state,
