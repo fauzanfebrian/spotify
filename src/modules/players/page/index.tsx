@@ -17,6 +17,7 @@ export interface PlayerPageProps {
 export default function PlayerPage({ data }: PlayerPageProps) {
     const [playback, setData] = useState(data)
     const [tracksSearch, setTracksSearch] = useState<Track[]>([])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         setInterval(async () => {
@@ -52,6 +53,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                 alt={state.item.name}
                                 width={200}
                                 height={200}
+                                loading="lazy"
                             />
                             <p>{state.item.name}</p>
                             <p>{state.item.artists.map(artist => artist.name).join(', ')}</p>
@@ -66,6 +68,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                 type="text"
                                 className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-green-600 w-full"
                                 onChange={async e => {
+                                    setSearch(e.target.value)
                                     const res = await axios.get(`/search`, {
                                         params: {
                                             search: e.target.value,
@@ -74,12 +77,14 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                     setTracksSearch(res.data)
                                 }}
                                 placeholder="Search track to add"
+                                value={search}
                             />
 
                             {tracksSearch.map((track, index) => (
                                 <div key={index} className="text-white text-sm flex space-x-2 items-end">
                                     <div>
                                         <Image
+                                            loading="lazy"
                                             src={track.album.images[0].url}
                                             alt={track.name}
                                             width={60}
@@ -94,6 +99,8 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                         <button
                                             className="text-2xl bg-green-600 rounded-lg px-2 py-1"
                                             onClick={async () => {
+                                                setSearch('')
+
                                                 const resAdd = await axios.post(`/add-queue`, undefined, {
                                                     params: {
                                                         uri: track.uri,
@@ -121,7 +128,13 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                         {tracksQueue.map((track, index) => (
                             <div key={index} className="text-white text-sm flex space-x-2 items-end">
                                 <div>
-                                    <Image src={track.album.images[0].url} alt={track.name} width={60} height={60} />
+                                    <Image
+                                        loading="lazy"
+                                        src={track.album.images[0].url}
+                                        alt={track.name}
+                                        width={60}
+                                        height={60}
+                                    />
                                 </div>
                                 <div>
                                     <p>{track.name}</p>
