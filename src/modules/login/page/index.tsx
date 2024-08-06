@@ -14,6 +14,8 @@ export default function LoginPage() {
             'user-read-recently-played',
             'playlist-read-private',
             'playlist-read-collaborative',
+            'user-read-playback-state',
+            'user-modify-playback-state',
         ].join(' ')
 
         const query = {

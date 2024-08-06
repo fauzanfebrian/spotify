@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 import { SpotifyData } from '../types'
 import { topArtists } from './artists'
-import { accessToken } from './axios'
 import { topGenres } from './genres'
 import { currentlyPlayingTrack } from './playingTrack'
 import { userPlaylists } from './playlists'
@@ -12,8 +11,6 @@ let cacheData: SpotifyData
 let cacheTTL: Date
 
 export async function spotifyData(): Promise<SpotifyData> {
-    await accessToken()
-
     if (cacheTTL > new Date() && cacheData) {
         cacheData.playingTrack = await currentlyPlayingTrack()
 

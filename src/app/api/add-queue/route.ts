@@ -1,13 +1,22 @@
-import { spotifyData } from '@/modules/home/data'
+import { addPlaybackQueue } from '@/modules/players/data/add-queue'
 import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
 import type { NextApiRequest } from 'next'
 
 export const revalidate = 0
 
-export async function GET(_req: NextApiRequest) {
+export async function POST(req: NextApiRequest) {
     try {
-        const data = await spotifyData()
+        const search = new URL(req.url || '').searchParams
+
+        const deviceId = search.get('device')
+        const uri = search.get('uri')
+
+        if (!uri || !deviceId) {
+            return responseJson(false)
+        }
+
+        const data = await addPlaybackQueue(uri, deviceId)
 
         return responseJson(data)
     } catch (error) {

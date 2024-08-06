@@ -1,4 +1,4 @@
-import { spotifyData } from '@/modules/home/data'
+import { getPlayerData } from '@/modules/players/data'
 import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
 import type { NextApiRequest } from 'next'
@@ -7,7 +7,7 @@ export const revalidate = 0
 
 export async function GET(_req: NextApiRequest) {
     try {
-        const data = await spotifyData()
+        const data = await getPlayerData()
 
         return responseJson(data)
     } catch (error) {

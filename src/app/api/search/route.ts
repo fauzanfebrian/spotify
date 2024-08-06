@@ -1,13 +1,19 @@
-import { spotifyData } from '@/modules/home/data'
+import { searchTrack } from '@/modules/players/data/search'
 import { responseJson } from '@/utils/response-json'
 import { AxiosError } from 'axios'
 import type { NextApiRequest } from 'next'
 
 export const revalidate = 0
 
-export async function GET(_req: NextApiRequest) {
+export async function GET(req: NextApiRequest) {
     try {
-        const data = await spotifyData()
+        const search = new URL(req.url || '').searchParams.get('search')
+
+        if (!search) {
+            return responseJson([])
+        }
+
+        const data = await searchTrack(search || '')
 
         return responseJson(data)
     } catch (error) {
