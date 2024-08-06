@@ -100,6 +100,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                             className="text-2xl bg-green-600 rounded-lg px-2 py-1"
                                             onClick={async () => {
                                                 setSearch('')
+                                                setTracksSearch([])
 
                                                 const resAdd = await axios.post(`/add-queue`, undefined, {
                                                     params: {
