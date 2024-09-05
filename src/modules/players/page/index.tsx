@@ -29,7 +29,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
         const intervalId = setInterval(reload, 5000)
 
         const onKeydown = async (event: KeyboardEvent) => {
-            if (event.ctrlKey && event.ctrlKey && event.shiftKey && event.altKey) {
+            if ((event.ctrlKey || event.metaKey) && event.ctrlKey && event.shiftKey && event.altKey) {
                 const key = event.key.toLowerCase()
                 event.preventDefault()
 

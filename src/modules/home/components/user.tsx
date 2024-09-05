@@ -1,9 +1,8 @@
 'use client'
 import { SPOTIFY_USER_ID } from '@/config'
-import Image from 'next/image'
-import { SpotifyData } from '../types'
 import Link from 'next/link'
 import { animated, useSpring } from 'react-spring'
+import { SpotifyData } from '../types'
 
 export default function User({ data }: { data: SpotifyData }) {
     const user = data.user
@@ -18,13 +17,12 @@ export default function User({ data }: { data: SpotifyData }) {
     return (
         <animated.div style={{ opacity }}>
             <section className="flex items-center">
-                <Image
+                <img
                     loading="lazy"
                     src={user.images?.[0].url}
                     alt="User photo profile"
                     width={80}
                     height={80}
-                    quality={50}
                     className="rounded-full mr-3 shadow-black shadow-sm object-cover w-20 h-20"
                 />
                 <h1 className="text-xl md:text-3xl text-white">

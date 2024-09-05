@@ -1,5 +1,3 @@
-import PlateImg from '@/assets/images/plate.png'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { animated, useSpring } from 'react-spring'
@@ -31,10 +29,9 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
         <animated.div style={{ clipPath, zIndex: 1000 }} className="sticky top-0 left-0" ref={wrapperRef}>
             <section className={'my-8 -mb-16'}>
                 <div className="h-32 bg-green-600 overflow-hidden relative mx-auto transition-all rounded-2xl max-w-full w-96">
-                    <Image
+                    <img
                         alt={track.name}
                         src={track.album.images[0].url}
-                        quality={30}
                         width={384}
                         height={128}
                         className="bg-cover object-cover w-full h-full absolute top-0 left-0 z-0"
@@ -45,21 +42,19 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                         }
                     >
                         <div className="relative flex items-center justify-center w-28 h-28">
-                            <Image
+                            <img
                                 alt="Plate"
-                                src={PlateImg}
+                                src="/assets/plate.png"
                                 className="animate-spin rounded-full absolute top-0 left-0 z-0"
                                 width={300}
                                 height={300}
-                                quality={30}
                             />
-                            <Image
+                            <img
                                 alt={track.name}
                                 src={track.album.images[0].url}
                                 width={90}
                                 height={90}
                                 className="rounded-full relative z-10"
-                                quality={50}
                             />
                         </div>
                         <div

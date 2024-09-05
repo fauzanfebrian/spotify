@@ -1,13 +1,12 @@
 'use client'
 import { animated, to as interpolate, useSprings } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useContext, useState } from 'react'
 import { HomeContext } from '../context'
 import { SpotifyData } from '../types'
-import TrackPreview from './track-preview'
 import { from, to, trans } from '../utils/deck'
+import TrackPreview from './track-preview'
 
 export default function Tracks({ data }: { data: SpotifyData }) {
     const [tracks] = useState([...data.tracks].reverse())
@@ -74,13 +73,12 @@ export default function Tracks({ data }: { data: SpotifyData }) {
                                     }}
                                 >
                                     <div className="w-52 h-52 relative">
-                                        <Image
+                                        <img
                                             alt={track.name}
                                             src={track.album.images[0].url}
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"
-                                            quality={30}
                                         />
                                         {!!track.preview_url && <TrackPreview url={track.preview_url} />}
                                     </div>

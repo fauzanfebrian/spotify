@@ -14,7 +14,5 @@ export async function searchTrack(search: string): Promise<Track[]> {
         },
     })
 
-    console.log(res.data)
-
     return res.data?.tracks?.items || []
 }

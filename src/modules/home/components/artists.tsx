@@ -1,7 +1,6 @@
 'use client'
 import { animated, to as interpolate, useSprings } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SpotifyData } from '../types'
@@ -69,13 +68,12 @@ export default function Artists({ data }: { data: SpotifyData }) {
                                     }}
                                 >
                                     <div className="w-52 h-52">
-                                        <Image
+                                        <img
                                             alt={artist.name}
                                             src={artist.images[0].url}
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"
-                                            quality={30}
                                         />
                                     </div>
                                     <div className="flex-1 p-3 overflow-hidden">
