@@ -45,27 +45,19 @@ export default function HomePage(props: { data: SpotifyData }) {
     }, [data])
 
     useEffect(() => {
-        if (navigator?.userAgent?.toLowerCase()?.includes('instagram')) {
-            const link = location.href.replace(/https?:\/\//, '')
+        const ua = (navigator.userAgent || navigator.vendor || '').toLowerCase()
 
-            const ua = navigator.userAgent || navigator.vendor
-
-            const isInstagram = ua.includes('Instagram')
-
-            if (!isInstagram) return
-
-            const chromeDeepLink = /iPad|iPhone|iPod/.test(ua)
-                ? `googlechrome://${link}`
-                : `intent://${link}#Intent;scheme=https;package=com.android.chrome;end;`
-
-            const aElement = document.createElement('a')
-
-            aElement.href = chromeDeepLink
-            aElement.target = '_blank'
-            aElement.rel = 'noopener noreferrer'
-
-            aElement.click()
+        if (!/ipad|iphone|ipod|android/.test(ua) || !ua.includes('instagram')) {
+            return
         }
+
+        const link = location.href.replace(/https?:\/\//, '')
+
+        const chromeDeepLink = /ipad|iphone|ipod/.test(ua)
+            ? `googlechrome://${link}`
+            : `intent://${link}#Intent;scheme=https;package=com.android.chrome;end;`
+
+        window.location.href = chromeDeepLink
     }, [])
 
     const inViewArtists = useInView()
