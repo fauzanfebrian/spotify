@@ -30,7 +30,6 @@ export default function HomePage(props: { data: SpotifyData }) {
     }
 
     useEffect(() => {
-        console.log(data)
         const actionId = setTimeout(async () => {
             try {
                 const res = await axios.get<SpotifyData>('/spotify-data')
@@ -44,6 +43,30 @@ export default function HomePage(props: { data: SpotifyData }) {
             clearTimeout(actionId)
         }
     }, [data])
+
+    useEffect(() => {
+        if (navigator?.userAgent?.toLowerCase()?.includes('instagram')) {
+            const link = location.href.replace(/https?:\/\//, '')
+
+            const ua = navigator.userAgent || navigator.vendor
+
+            const isInstagram = ua.includes('Instagram')
+
+            if (!isInstagram) return
+
+            const chromeDeepLink = /iPad|iPhone|iPod/.test(ua)
+                ? `googlechrome://${link}`
+                : `intent://${link}#Intent;scheme=https;package=com.android.chrome;end;`
+
+            const aElement = document.createElement('a')
+
+            aElement.href = chromeDeepLink
+            aElement.target = '_blank'
+            aElement.rel = 'noopener noreferrer'
+
+            aElement.click()
+        }
+    }, [])
 
     const inViewArtists = useInView()
     const inViewGenres = useInView()
