@@ -30,6 +30,7 @@ export default function HomePage(props: { data: SpotifyData }) {
     }
 
     useEffect(() => {
+        console.log(data)
         const actionId = setTimeout(async () => {
             try {
                 const res = await axios.get<SpotifyData>('/spotify-data')
