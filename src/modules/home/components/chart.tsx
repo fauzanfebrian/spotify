@@ -4,13 +4,13 @@ import { SpotifyData } from '../types'
 export default function Chart({ data }: { data: SpotifyData }) {
     const lineWidth = 60
 
-    const datasource = [
-        { title: data.genres[0].name, value: data.genres[0].percentage, color: '#018383' },
-        { title: data.genres[1].name, value: data.genres[1].percentage, color: '#02A8A8' },
-        { title: data.genres[2].name, value: data.genres[2].percentage, color: '#42E6A4' },
-        { title: data.genres[3].name, value: data.genres[3].percentage, color: '#F5DEA3' },
-        { title: data.genres[4].name, value: data.genres[4].percentage, color: '#444941' },
-    ]
+    const datasource = Object.values(data.genres).map((genre, i) => {
+        return {
+            title: genre.name,
+            value: genre.percentage,
+            color: ['#018383', '#02A8A8', '#42E6A4', '#F5DEA3', '#444941'][i],
+        }
+    })
 
     return (
         <>

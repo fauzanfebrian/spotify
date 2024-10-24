@@ -80,7 +80,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                         <p className="text-green-600 italic font-bold text-xl">Now Playing</p>
                         <div className="flex flex-col justify-center xs:items-center xs:text-center mt-4 text-white">
                             <img
-                                src={state.item.album.images[0].url}
+                                src={state.item.album.images[0]?.url}
                                 alt={state.item.name}
                                 width={200}
                                 height={200}
@@ -117,7 +117,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                         <div>
                                             <img
                                                 loading="lazy"
-                                                src={track.album.images[0].url}
+                                                src={track.album.images[0]?.url}
                                                 alt={track.name}
                                                 width={60}
                                                 height={60}
@@ -165,7 +165,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                                 <div>
                                     <img
                                         loading="lazy"
-                                        src={track.album.images[0].url}
+                                        src={track.album.images[0]?.url}
                                         alt={track.name}
                                         width={60}
                                         height={60}
