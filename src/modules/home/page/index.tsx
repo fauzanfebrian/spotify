@@ -44,6 +44,22 @@ export default function HomePage(props: { data: SpotifyData }) {
         }
     }, [data])
 
+    useEffect(() => {
+        const ua = (navigator.userAgent || navigator.vendor || '').toLowerCase()
+
+        if (!/ipad|iphone|ipod|android/.test(ua) || !ua.includes('instagram')) {
+            return
+        }
+
+        const link = location.href.replace(/https?:\/\//, '')
+
+        const chromeDeepLink = /ipad|iphone|ipod/.test(ua)
+            ? `googlechrome://${link}`
+            : `intent://${link}#Intent;scheme=https;package=com.android.chrome;end;`
+
+        window.location.href = chromeDeepLink
+    }, [])
+
     const inViewArtists = useInView()
     const inViewGenres = useInView()
     const inViewTracks = useInView()
