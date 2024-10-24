@@ -76,7 +76,7 @@ export default function Tracks({ data }: { data: SpotifyData }) {
                                     <div className="w-52 h-52 relative">
                                         <Image
                                             alt={track.name}
-                                            src={track.album.images[0].url}
+                                            src={track.album.images[0]?.url}
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"

@@ -20,7 +20,7 @@ export async function generateMetadata(_: any, parent: ResolvingMetadata): Promi
     const title = `${data.user.display_name}'s Spotify Statistic`
     const description = `Explore ${data.user.display_name} Spotify statistics, including top genres, artists, tracks, playlists, and currently playing track.`
     const author = data.user.display_name
-    const images = [data.user.images[0].url, ...previousImages]
+    const images = [data.user.images[0]?.url, ...previousImages]
 
     return {
         title,
@@ -36,7 +36,7 @@ export async function generateMetadata(_: any, parent: ResolvingMetadata): Promi
             description,
             images,
         },
-        icons: data.user.images[0].url,
+        icons: data.user.images[0]?.url,
         description,
         keywords: [
             `Spotify`,

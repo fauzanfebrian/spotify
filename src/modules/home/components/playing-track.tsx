@@ -33,7 +33,7 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                 <div className="h-32 bg-green-600 overflow-hidden relative mx-auto transition-all rounded-2xl max-w-full w-96">
                     <Image
                         alt={track.name}
-                        src={track.album.images[0].url}
+                        src={track.album.images[0]?.url}
                         quality={30}
                         width={384}
                         height={128}
@@ -55,7 +55,7 @@ export default function PlayingTrack({ data }: { data: SpotifyData }) {
                             />
                             <Image
                                 alt={track.name}
-                                src={track.album.images[0].url}
+                                src={track.album.images[0]?.url}
                                 width={90}
                                 height={90}
                                 className="rounded-full relative z-10"

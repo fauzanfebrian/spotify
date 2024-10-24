@@ -71,7 +71,7 @@ export default function Artists({ data }: { data: SpotifyData }) {
                                     <div className="w-52 h-52">
                                         <Image
                                             alt={artist.name}
-                                            src={artist.images[0].url}
+                                            src={artist.images[0]?.url}
                                             width={208}
                                             height={208}
                                             className="touch-none h-52 bg-cover"

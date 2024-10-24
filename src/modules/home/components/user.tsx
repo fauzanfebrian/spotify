@@ -20,7 +20,7 @@ export default function User({ data }: { data: SpotifyData }) {
             <section className="flex items-center">
                 <Image
                     loading="lazy"
-                    src={user.images?.[0].url}
+                    src={user.images?.[0]?.url}
                     alt="User photo profile"
                     width={80}
                     height={80}
