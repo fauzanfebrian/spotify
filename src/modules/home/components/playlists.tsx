@@ -46,7 +46,7 @@ export default function Playlists({ data }: { data: SpotifyData }) {
                                     <div className="h-60 w-60 rounded-2xl overflow-hidden relative">
                                         <Image
                                             alt={playlist.name}
-                                            src={playlist.images[0]?.url}
+                                            src={playlist.images?.[0]?.url || ''}
                                             width={320}
                                             height={320}
                                             className="opacity-50 absolute top-0 left-0 bottom-0 right-0"
@@ -55,7 +55,7 @@ export default function Playlists({ data }: { data: SpotifyData }) {
                                         <div className="bg-black bg-opacity-50 relative z-10 w-full h-full text-white p-5 text-center flex items-center justify-between flex-col">
                                             <Image
                                                 alt={playlist.name}
-                                                src={playlist.images[0]?.url}
+                                                src={playlist.images?.[0]?.url || ''}
                                                 width={120}
                                                 height={120}
                                                 className="rounded-lg"
