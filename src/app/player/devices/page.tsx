@@ -30,7 +30,7 @@ export default async function page() {
             <ul className="px-11 list-disc">
                 {playlists.map(playlist => (
                     <li key={playlist.id} className="text-white mt-3">
-                        <p className="italic">#{playlist.id}</p>
+                        <p className="italic">#{playlist.uri}</p>
                         <h2>{playlist.name}</h2>
                         <p>{playlist.description}</p>
                         <p>{playlist.tracks.total} tracks</p>
