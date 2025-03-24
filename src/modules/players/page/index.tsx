@@ -42,7 +42,7 @@ export default function PlayerPage({ data }: PlayerPageProps) {
                     await reload()
                 }
 
-                if (key === 'q') {
+                if (key === 'p') {
                     setShowQueue(queue => !queue)
                 }
             }
