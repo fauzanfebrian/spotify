@@ -1,7 +1,6 @@
 import { userPlaylists } from '@/modules/home/data/playlists'
 import { playTrack } from '@/modules/players/data/play-track'
 import { responseJson } from '@/utils/response-json'
-import { AxiosError } from 'axios'
 import { NextApiRequest } from 'next'
 
 export async function GET(req: NextApiRequest) {
