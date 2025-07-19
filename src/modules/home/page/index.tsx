@@ -1,18 +1,17 @@
 'use client'
-import axios from '@/axios'
+import useInView from '@/hooks/useInView'
 import { RefObject, useEffect, useState } from 'react'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import Artists from '../components/artists'
 import Genres from '../components/genres'
+import PlayingTrack from '../components/playing-track'
 import Playlists from '../components/playlists'
 import Tracks from '../components/tracks'
 import User from '../components/user'
 import { HomeContext } from '../context'
 import '../styles/style.css'
 import { SpotifyData } from '../types'
-import PlayingTrack from '../components/playing-track'
-import useInView from '@/hooks/useInView'
 
 export default function HomePage(props: { data: SpotifyData }) {
     const [data, setData] = useState(props.data)
@@ -30,19 +29,14 @@ export default function HomePage(props: { data: SpotifyData }) {
     }
 
     useEffect(() => {
-        const actionId = setTimeout(async () => {
-            try {
-                const res = await axios.get<SpotifyData>('/spotify-data')
-                setData(res.data)
-            } catch (error) {
-                return
-            }
-        }, 1000 * 5)
-
-        return () => {
-            clearTimeout(actionId)
+        const eventSource = new EventSource('/api/spotify-data')
+        eventSource.onmessage = event => {
+            const data = JSON.parse(event.data)
+            setData(data)
         }
-    }, [data])
+
+        return () => eventSource.close()
+    }, [])
 
     useEffect(() => {
         const ua = (navigator.userAgent || navigator.vendor || '').toLowerCase()
