@@ -3,6 +3,8 @@ import { SearchResponse, Track } from '../types/search'
 
 export const revalidate = 0
 
+const blockedArtistIds = ['0zuIBB0gRxp4i4E2gvrcoM', '0NbKRRBuiIUwS9irPvi7wD']
+
 export async function searchTrack(search: string): Promise<Track[]> {
     const res = await axios.get<SearchResponse>('/search', {
         params: {
@@ -14,5 +16,16 @@ export async function searchTrack(search: string): Promise<Track[]> {
         },
     })
 
-    return res.data?.tracks?.items || []
+    const tracks = res.data?.tracks?.items || []
+
+    tracks.forEach(track => {
+        track?.artists?.forEach(artist => {
+            if (blockedArtistIds.includes(artist?.id)) {
+                tracks.splice(tracks.indexOf(track), 1)
+                return
+            }
+        })
+    })
+
+    return tracks
 }
