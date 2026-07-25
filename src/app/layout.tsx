@@ -32,6 +32,21 @@ export default function RootLayout({
                     src="/assets/background.jpg"
                     className="object-cover z-0 w-screen h-screen fixed top-0"
                 />
+                <a
+                    href="https://fauzanfebrian.my.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fixed bottom-4 right-4 z-[9999] flex items-center pointer-events-auto no-underline"
+                >
+                    <span className="font-['Montserrat',_sans-serif] text-[12px] text-[#171717] font-normal tracking-[0.5px]">
+                        Built with love
+                    </span>
+                    <img
+                        src="https://fauzanfebrian.my.id/logo.svg"
+                        alt="Fauzan Febrian Logo"
+                        className="w-5 h-5 ml-[6px] inline-block"
+                    />
+                </a>
             </body>
 
             {!!GOOGLE_TAG_ID && (
